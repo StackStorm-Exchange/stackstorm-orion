@@ -24,10 +24,11 @@ class GetNodeSoftware(OrionBaseAction):
 
         self.connect()
 
-        swql = """SELECT nodes.nodeid, nodes.sysname, nodes.caption, Software.Name, 
-                Software.Version, Software.Publisher
+        swql = """SELECT nodes.nodeid, nodes.sysname, nodes.caption,
+                Software.Name, Software.Version, Software.Publisher
                 FROM Orion.Nodes
-                INNER JOIN Orion.AssetInventory.Software ON Software.NodeId = Nodes.NodeId
+                INNER JOIN Orion.AssetInventory.Software
+                ON Software.NodeId = Nodes.NodeId
                 WHERE Nodes.UnManaged = False """
 
         if matchtype == "sysname":
