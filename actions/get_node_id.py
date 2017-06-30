@@ -29,10 +29,11 @@ class GetNodeId(OrionBaseAction):
             swql += " where sysname = '%s'" % matchstring
         elif matchtype == "caption":
             swql += " where Caption = '%s'" % matchstring
-        print swql
-
 
         kargs = {}
-        orion_data = self.query(swql, **kargs)
+        try:
+            orion_data = self.query(swql, **kargs)
+        except:
+            orion_data['results'] = "empty"
 
         return orion_data

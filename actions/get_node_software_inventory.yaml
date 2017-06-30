@@ -12,6 +12,7 @@ parameters:
     description: "How to match node"
     default: "nodeid"
     required: true
+    position: 0
     enum:
       - sysname
       - caption
@@ -20,3 +21,4 @@ parameters:
     type: "string"
     description: "Text to match against."
     required: true
+    position: 1

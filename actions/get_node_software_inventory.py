@@ -38,6 +38,10 @@ class GetNodeSoftware(OrionBaseAction):
             swql += " and nodes.nodeid = %s" % matchstring
 
         kargs = {}
-        orion_data = self.query(swql, **kargs)
+
+        try:
+            orion_data = self.query(swql, **kargs)
+        except:
+            orion_data['results'] = "empty"
 
         return orion_data

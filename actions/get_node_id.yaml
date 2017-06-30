@@ -11,6 +11,7 @@ parameters:
     type: "string"
     description: "How to match node"
     default: "all"
+    position: 0
     enum:
       - all
       - sysname
@@ -18,3 +19,4 @@ parameters:
   matchstring:
     type: "string"
     description: "Text to match against."
+    position: 1
