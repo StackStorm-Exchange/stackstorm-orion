@@ -1,0 +1,20 @@
+---
+description: "Get Node ID value"
+enabled: true
+entry_point: 'get_node_id.py'
+name: "get_node_id"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  matchtype:
+    type: "string"
+    description: "How to match node"
+    default: "all"
+    enum:
+      - all
+      - sysname
+      - caption
+  matchstring:
+    type: "string"
+    description: "Text to match against."
