@@ -7,16 +7,7 @@ pack: "orion"
 runner_type: "python-script"
 
 parameters:
-  matchtype:
+  node:
     type: "string"
-    description: "How to match node"
-    default: "all"
+    description: "Name or IP of node."
     position: 0
-    enum:
-      - all
-      - sysname
-      - caption
-  matchstring:
-    type: "string"
-    description: "Text to match against."
-    position: 1

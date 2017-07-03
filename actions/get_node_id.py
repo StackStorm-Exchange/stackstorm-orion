@@ -17,23 +17,13 @@ from lib.actions import OrionBaseAction
 
 
 class GetNodeId(OrionBaseAction):
-    def run(self, matchtype=None, matchstring=None):
+    def run(self, node=None):
         """
         Get Orion Node ID, sysnames and caption
         """
 
         self.connect()
 
-        swql = "SELECT nodeid, sysname, caption FROM Orion.Nodes"
-        if matchtype == "sysname":
-            swql += " where sysname = '%s'" % matchstring
-        elif matchtype == "caption":
-            swql += " where Caption = '%s'" % matchstring
+        orion_data = self.get_node(node)
 
-        kargs = {}
-        try:
-            orion_data = self.query(swql, **kargs)
-        except:
-            orion_data['results'] = "empty"
-
-        return orion_data
+        return orion_data.npm_id
