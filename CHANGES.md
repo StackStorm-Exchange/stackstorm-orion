@@ -1,5 +1,10 @@
 # Changelog
 
+# 0.6
+
+- Addition of get_node_id action
+- Addition of softare_inventory action
+
 # 0.5
 
 - Renamed node_pollnow action to nodes_pollnow and extended it to
@@ -18,7 +23,7 @@
 
 # 0.3.1
 
-- In the Orion.node_status alais set the color for the result so it
+- In the Orion.node_status alias set the color for the result so it
   reflects it status.
 
 # 0.3
