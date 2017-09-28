@@ -9,7 +9,7 @@ runner_type: "python-script"
 parameters:
   name:
     type: "string"
-    description: "Name for the discorty profile"
+    description: "Name for the discovery profile"
     required: true
   poller:
     type: "string"
@@ -26,7 +26,7 @@ parameters:
     description: "List of ip_ranges (start_ip:end_ip) to add to Orion."
   snmp_communities:
     type: "array"
-    description: "Array of SNMP community strings or configured standard names (Note: must already be in suee)."
+    description: "Array of SNMP community strings or configured standard names (Note: must already be in use)."
     required: true
   no_icmp_only:
     type: "boolean"

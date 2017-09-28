@@ -1,11 +1,11 @@
 ---
 orion_label:
-  description: "The label to use when referancing the Orion platform."
+  description: "The label to use when referencing the Orion platform."
   type: "string"
   required: true
   default: "orion"
 orion_host:
-  description: "The name / IP of the primary orion server."
+  description: "The name / IP of the primary Orion server."
   type: "string"
   required: true
 orion_user:
@@ -18,7 +18,7 @@ orion_password:
   secret: true
   required: true
 unmanage_max:
-  description: "Max allowed time (in mintues) that a node can be put into an unmanaged state."
+  description: "Max allowed time (in minutes) that a node can be put into an unmanaged state."
   type: "integer"
   required: true
   default: 60

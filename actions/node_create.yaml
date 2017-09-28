@@ -21,7 +21,7 @@ parameters:
     default: "primary"
   mon_protocol:
     type: "string"
-    description: "The monitoing protocol to use (only snmpv2 currently supported)."
+    description: "The monitoring protocol to use (only snmpv2 currently supported)."
     enum:
       - "icmp"
       - "snmpv1"
