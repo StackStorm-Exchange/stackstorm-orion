@@ -3,7 +3,7 @@
 ## 0.6
 
 - Addition of get_node_id action
-- Addition of softare_inventory action
+- Addition of software_inventory action
 
 ## 0.5.1
 
