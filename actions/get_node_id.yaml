@@ -11,3 +11,4 @@ parameters:
     type: "string"
     description: "Name or IP of node."
     position: 0
+    required: true

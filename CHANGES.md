@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.6
+
+- Addition of get_node_id action
+- Addition of software_inventory action
+
 ## 0.5.1
 
 - Added example configuration file
