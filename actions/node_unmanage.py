@@ -19,7 +19,7 @@ from lib.actions import OrionBaseAction
 
 
 class NodeUnmanage(OrionBaseAction):
-    def run(self, node, minutes):
+    def run(self, node, minutes=None, start_date=None, end_date=None):
         """
         Unmanage an Orion node
         """
@@ -37,14 +37,35 @@ class NodeUnmanage(OrionBaseAction):
             raise ValueError("Node not found")
 
         NodeId = "N:{}".format(orion_node.npm_id)
-        now = datetime.utcnow()
-        later = now + timedelta(minutes=minutes)
+
+        start_utc = None
+        end_utc = None
+        if minutes is not None:
+            """If minutes is given get current time in UTC then add the minutes to the
+            end of the time to get End time. All dates must be in UTC Format
+            """
+            start_utc = datetime.utcnow()
+            end_utc = start_utc + timedelta(minutes=minutes)
+        elif start_date is not None and end_date is not None:
+            """Get the UTC offest from substracting the current Local time from the
+            Current UTC time. The use that to convert the given start and end times to
+            utc times so that it can be sent to SolarWinds
+            """
+            UTC_OFFSET_TIMEDELTA = datetime.utcnow() - datetime.now()
+
+            start_local = datetime.strptime(start_date, "%Y-%m-%d %H:%M")
+            start_utc = start_local + UTC_OFFSET_TIMEDELTA
+
+            end_local = datetime.strptime(end_date, "%Y-%m-%d %H:%M")
+            end_utc = end_local + UTC_OFFSET_TIMEDELTA
+        else:
+            raise ValueError("Must supply either minutes or start_date and end_date")
 
         orion_data = self.invoke("Orion.Nodes",
                                  "Unmanage",
                                  NodeId,
-                                 now,
-                                 later,
+                                 start_utc,
+                                 end_utc,
                                  False)
 
         # This Invoke always returns None, so check and return True

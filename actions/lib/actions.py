@@ -104,6 +104,36 @@ class OrionBaseAction(Action):
 
         return orion_node
 
+    def get_agent(self, orion_node):
+        """
+        Get orion agent information and add it to the OrionNode object.
+        """
+        swql = """SELECT AgentID, Uri
+        FROM Orion.AgentManagement.Agent
+        WHERE NodeId=@query_on"""
+        kargs = {'query_on': orion_node.npm_id}
+        data = self.query(swql, **kargs)
+
+        if 'results' not in data:
+            msg = "No results from Orion: {}".format(data)
+            self.logger.info(msg)
+            raise Exception(msg)
+
+        if len(data['results']) == 1:
+            try:
+                orion_node.agent_id = data['results'][0]['AgentID']
+                orion_node.agent_uri = data['results'][0]['Uri']
+            except IndexError:
+                pass
+        elif len(data['results']) >= 2:
+            self.logger.debug(
+                "Muliple Nodes match '{}' Caption: {}".format(
+                    node, data))
+            raise ValueError("Muliple Nodes match '{}' Caption".format(
+                node))
+
+        return orion_node
+
     def query(self, swql, **kargs):
         """
         Run SWQL against the Orion Platform.
