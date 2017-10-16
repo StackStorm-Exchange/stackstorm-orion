@@ -40,9 +40,9 @@ class NodeUnmanage(OrionBaseAction):
             end of the time to get End time. All dates must be in UTC Format
             """
             if minutes > self.config['unmanage_max']:
-            raise ValueError(
-                "minutes ({}) greater than unmanage_max ({})".format(
-                    minutes, self.config['unmanage_max']))
+                raise ValueError(
+                    "minutes ({}) greater than unmanage_max ({})".format(
+                        minutes, self.config['unmanage_max']))
 
             start_utc = datetime.utcnow()
             end_utc = start_utc + timedelta(minutes=minutes)
