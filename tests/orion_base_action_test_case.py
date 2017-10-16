@@ -68,6 +68,27 @@ class OrionBaseActionTestCase(BaseActionTestCase):
         action.connect = MagicMock(return_value="orion")
         action.query = MagicMock(side_effect=query_data)
 
+        return
+
+    def setup_agent_blank_agent(self):
+        query_data = []
+
+        # Load node but blank out agent information
+        npm_node = self.query_npm_node
+        npm_node.results[0].agent_id = None
+        npm_node.results[0].agent_uri = None
+
+        query_data.append(npm_node)
+        query_data.append(self.query_ncm_node)
+
+        action = self.get_action_instance(config=self.full_config)
+
+        action.connect = MagicMock(return_value="orion")
+        action.query = MagicMock(side_effect=query_data)
+        action.invoke = MagicMock(return_value=None)
+        action.update = MagicMock(return_value=None)
+        action.delete = MagicMock(return_value=None)
+
         return action
 
     def setup_node_exists(self):
@@ -81,6 +102,7 @@ class OrionBaseActionTestCase(BaseActionTestCase):
         action.query = MagicMock(side_effect=query_data)
         action.invoke = MagicMock(return_value=None)
         action.update = MagicMock(return_value=None)
+        action.delete = MagicMock(return_value=None)
 
         return action
 

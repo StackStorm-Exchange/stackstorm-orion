@@ -16,7 +16,7 @@
 from lib.actions import OrionBaseAction
 
 
-class GetAgenteId(OrionBaseAction):
+class GetAgentId(OrionBaseAction):
     def run(self, node=None):
         """
         Get Orion Agent ID
