@@ -4,5 +4,3 @@ results:
     Caption: "router1"
     IPAddress: "192.168.0.1"
     Uri: '/Orion/NetPerfMon/NodeDetails.aspx?NetObject=N:1'
-    agent_id: 2
-    agent_uri: '/Orion/Orion.AgentManagement.Agent/AgentId=2'
