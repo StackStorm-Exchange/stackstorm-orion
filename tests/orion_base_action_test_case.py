@@ -73,7 +73,7 @@ class OrionBaseActionTestCase(BaseActionTestCase):
         action.connect = MagicMock(return_value="orion")
         action.query = MagicMock(side_effect=query_data)
 
-        return
+        return action
 
     def setup_node_exists(self):
         query_data = []
