@@ -47,7 +47,7 @@ class NodeUnmanageTestCase(OrionBaseActionTestCase):
 
     def test_run_unmanaged_with_date(self):
         action = self.setup_node_exists()
-        start_date = "2017-10-16 10:05"
+        start_date = "2017-10-16 14:30"
         end_date = "2017-10-16 15:00"
         self.assertTrue(action.run("router1", start_date, end_date))
 
@@ -69,7 +69,7 @@ class NodeUnmanageTestCase(OrionBaseActionTestCase):
 
     def test_run_invoke_returns_text_with_date(self):
         expected = "fake"
-        start_date = "2017-10-16 10:05"
+        start_date = "2017-10-16 14:30"
         end_date = "2017-10-16 15:00"
 
         query_data = []
