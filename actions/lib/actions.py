@@ -128,9 +128,9 @@ class OrionBaseAction(Action):
         elif len(data['results']) >= 2:
             self.logger.debug(
                 "Muliple Nodes match '{}' Caption: {}".format(
-                    node, data))
+                    orion_node.npm_id, data))
             raise ValueError("Muliple Nodes match '{}' Caption".format(
-                node))
+                orion_node.npm_id))
 
         return orion_node
 
