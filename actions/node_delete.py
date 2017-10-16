@@ -29,7 +29,6 @@ class NodeDelete(OrionBaseAction):
         if not orion_node.npm:
             raise ValueError("Node not found")
 
-
         orion_data = self.delete(orion_node.uri)
 
         # This Delete always returns None, so check and return True
