@@ -24,11 +24,6 @@ class NodeUnmanage(OrionBaseAction):
         Unmanage an Orion node
         """
 
-        if minutes > self.config['unmanage_max']:
-            raise ValueError(
-                "minutes ({}) greater than unmanage_max ({})".format(
-                    minutes, self.config['unmanage_max']))
-
         self.connect()
 
         orion_node = self.get_node(node)
@@ -44,6 +39,11 @@ class NodeUnmanage(OrionBaseAction):
             """If minutes is given get current time in UTC then add the minutes to the
             end of the time to get End time. All dates must be in UTC Format
             """
+            if minutes > self.config['unmanage_max']:
+            raise ValueError(
+                "minutes ({}) greater than unmanage_max ({})".format(
+                    minutes, self.config['unmanage_max']))
+
             start_utc = datetime.utcnow()
             end_utc = start_utc + timedelta(minutes=minutes)
         elif start_date is not None and end_date is not None:
