@@ -4,7 +4,7 @@ machine:
 
 checkout:
   post:
-    - git clone -b master git@github.com:stackstorm-exchange/ci.git ~/ci
+    - git clone -b feature/encore-added-functionality git@github.com:stackstorm-exchange/ci.git ~/ci
 
 dependencies:
   cache_directories:
@@ -19,7 +19,7 @@ test:
 
 deployment:
   index:
-    branch: master
+    branch: feature/encore-added-functionality
     owner: StackStorm-Exchange
     commands:
       - ~/ci/.circle/deployment
