@@ -28,6 +28,7 @@ class OrionBaseActionTestCase(BaseActionTestCase):
         self._full_config = self.load_yaml('configs/full.yaml')
         self._query_npm_node = self.load_yaml('orion_npm_results.yaml')
         self._query_ncm_node = self.load_yaml('orion_ncm_results.yaml')
+        self._query_node_agent = self.load_yaml('orion_agent_results.yaml')
 
     def load_yaml(self, filename):
         return yaml.safe_load(self.get_fixture_content(filename))
@@ -47,6 +48,10 @@ class OrionBaseActionTestCase(BaseActionTestCase):
     @property
     def query_ncm_node(self):
         return self._query_ncm_node
+
+    @property
+    def query_node_agent(self):
+        return self._query_node_agent
 
     @property
     def query_no_results(self):
@@ -70,15 +75,9 @@ class OrionBaseActionTestCase(BaseActionTestCase):
 
         return
 
-    def setup_agent_blank_agent(self):
+    def setup_node_exists(self):
         query_data = []
-
-        # Load node but blank out agent information
-        npm_node = self.query_npm_node
-        npm_node.results[0].agent_id = None
-        npm_node.results[0].agent_uri = None
-
-        query_data.append(npm_node)
+        query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
 
         action = self.get_action_instance(config=self.full_config)
@@ -91,10 +90,11 @@ class OrionBaseActionTestCase(BaseActionTestCase):
 
         return action
 
-    def setup_node_exists(self):
+    def setup_agent_exists(self):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
 
         action = self.get_action_instance(config=self.full_config)
 
