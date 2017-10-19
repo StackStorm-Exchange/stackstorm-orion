@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.7
+
+- Addition of get_agent_id action
+- Addition of agent_delete action
+- Addition of node_delete action
+- Addition of agent information to Node definition
+  - Accepts agent_id and angent_uri
+- Addition of agent query to get agent information
+  - Uses Node ID information to query for Agent
+- Addition of date inputs for node_unmanage
+  - kept minutes functionality
+  - allows unmanage to be scheduled for future if needed
+
 ## 0.6
 
 - Addition of get_node_id action
