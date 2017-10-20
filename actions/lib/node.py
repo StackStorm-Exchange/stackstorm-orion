@@ -123,9 +123,6 @@ class OrionNode(object):
         if agent_id is not None:
             self._agent_id = agent_id
             self._agent = True
-        else:
-            self._agent_id = None
-            self._agent = False
 
     @property
     def agent(self):
