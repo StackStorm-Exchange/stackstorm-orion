@@ -62,9 +62,9 @@ class NodeCreateTestCase(OrionBaseActionTestCase):
 
     def test_run_node_ip_exists(self):
         query_data = []
-        query_data.append(self.query_no_results)
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
 
         action = self.get_action_instance(config=self.full_config)
 
