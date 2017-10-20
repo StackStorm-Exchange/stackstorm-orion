@@ -49,6 +49,7 @@ class NodeDiscoverAndAddInterfacesTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
 
         invoke_data = []
         invoke_data.append(self.load_yaml(

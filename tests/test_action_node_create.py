@@ -119,6 +119,7 @@ class NodeCreateTestCase(OrionBaseActionTestCase):
 
         query_data = [self.query_no_results,
                       self.query_no_results,
+                      self.query_no_results,
                       {'results': [{'EngineID': 2}]}]
 
         action = self.get_action_instance(config=self.full_config)
