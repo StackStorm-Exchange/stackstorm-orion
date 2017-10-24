@@ -12,47 +12,35 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 
-from mock import MagicMock
+# from mock import MagicMock
 
 from orion_base_action_test_case import OrionBaseActionTestCase
 
-from list_node_custom_properties import ListNodeCustomProperties
+from node_delete import NodeDelete
 
 __all__ = [
-    'ListNodeCustomProperties'
+    'NodeDeleteTestCase'
 ]
 
 
-class ListNodeCustomPropertiesTestCase(OrionBaseActionTestCase):
+class NodeDeleteTestCase(OrionBaseActionTestCase):
     __test__ = True
-    action_cls = ListNodeCustomProperties
+    action_cls = NodeDelete
 
     def test_run_connect_fail(self):
         action = self.setup_connect_fail()
-        self.assertRaises(ValueError,
-                          action.run,
-                          "router1")
+        self.assertRaises(ValueError, action.run)
 
-    def test_run_node_not_exist(self):
+    def test_run_node_fail(self):
         action = self.setup_query_blank_results()
-        self.assertRaises(UserWarning,
-                          action.run,
-                          "router1")
+        self.assertRaises(ValueError,
+                        action.run,
+                        "router1")
 
-    def test_run_list_node_custom_prop(self):
-        expected = "abc-1234"
+    def test_run(self):
+        action = self.setup_node_exists()
 
-        query_data = []
-        query_data.append(self.query_npm_node)
-        query_data.append(self.query_ncm_node)
-        query_data.append(self.query_no_results)
-
-        action = self.get_action_instance(config=self.full_config)
-
-        action.connect = MagicMock(return_value="orion")
-        action.query = MagicMock(side_effect=query_data)
-        action.read = MagicMock(return_value="abc-1234")
+        expected_result = True
 
         result = action.run("router1")
-
-        self.assertEqual(result, expected)
+        self.assertEqual(result, expected_result)

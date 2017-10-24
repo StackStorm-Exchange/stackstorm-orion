@@ -1,0 +1,13 @@
+---
+description: "Delete Orion Node"
+enabled: true
+entry_point: 'node_delete.py'
+name: "node_delete"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  node:
+    type: "string"
+    description: The node to delete in Orion.
+    required: true

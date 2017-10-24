@@ -85,22 +85,47 @@ class OrionBaseAction(Action):
                 node))
 
         if orion_node.npm:
-            swql = """SELECT NodeID
+            swql_ncm = """SELECT NodeID
             FROM Cirrus.Nodes
             WHERE CoreNodeID=@CoreNodeID"""
             kargs = {'CoreNodeID': orion_node.npm_id}
-            data = self.query(swql, **kargs)
+            data_ncm = self.query(swql_ncm, **kargs)
 
             # Don't raise an exception if this fails.
-            # The platform may not haev NCM installed.
-            if 'results' not in data:
-                msg = "No results from Orion NCM: {}".format(data)
+            # The platform may not have NCM installed.
+            if 'results' not in data_ncm:
+                msg = "No results from Orion NCM: {}".format(data_ncm)
                 self.logger.info(msg)
-            elif len(data['results']) == 1:
+            elif len(data_ncm['results']) == 1:
                 try:
-                    orion_node.ncm_id = data['results'][0]['NodeID']
+                    orion_node.ncm_id = data_ncm['results'][0]['NodeID']
                 except IndexError:
                     pass
+
+            swql_agent = """SELECT AgentID, Uri
+            FROM Orion.AgentManagement.Agent
+            WHERE NodeId=@query_on"""
+            kargs = {'query_on': orion_node.npm_id}
+            data_agent = self.query(swql_agent, **kargs)
+
+            # Since there might not always be an agent we
+            # will not raise if the results do not return anything
+            if 'results' not in data_agent:
+                msg = "No results from Orion Agent: {}".format(data_agent)
+                self.logger.info(msg)
+
+            if len(data_agent['results']) == 1:
+                try:
+                    orion_node.agent_id = data_agent['results'][0]['AgentID']
+                    orion_node.agent_uri = data_agent['results'][0]['Uri']
+                except IndexError:
+                    pass
+            elif len(data_agent['results']) >= 2:
+                self.logger.debug(
+                    "Muliple Nodes match '{}' Caption: {}".format(
+                        orion_node.npm_id, data_agent))
+                raise ValueError("Muliple Nodes match '{}' Caption".format(
+                    orion_node.npm_id))
 
         return orion_node
 

@@ -32,18 +32,24 @@ class NodeUnmanageTestCase(OrionBaseActionTestCase):
         self.assertRaises(ValueError,
                           action.run,
                           "router1",
-                          30)
+                          minutes=30)
 
     def test_run_node_not_found(self):
         action = self.setup_query_blank_results()
         self.assertRaises(ValueError,
                           action.run,
                           "router1",
-                          30)
+                          minutes=30)
 
     def test_run_unmanaged(self):
         action = self.setup_node_exists()
-        self.assertTrue(action.run("router1", 30))
+        self.assertTrue(action.run("router1", minutes=30))
+
+    def test_run_unmanaged_with_date(self):
+        action = self.setup_node_exists()
+        start_date = "2017-10-16 14:30"
+        end_date = "2017-10-16 15:00"
+        self.assertTrue(action.run("router1", start_date=start_date, end_date=end_date))
 
     def test_run_invoke_returns_text(self):
         expected = "fake"
@@ -51,6 +57,7 @@ class NodeUnmanageTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
 
         action = self.get_action_instance(config=self.full_config)
 
@@ -58,12 +65,37 @@ class NodeUnmanageTestCase(OrionBaseActionTestCase):
         action.query = MagicMock(side_effect=query_data)
         action.invoke = MagicMock(return_value="fake")
 
-        result = action.run("router1", 30)
+        result = action.run("router1", minutes=30)
         self.assertEqual(result, expected)
+
+    def test_run_invoke_returns_text_with_date(self):
+        expected = "fake"
+        start_date = "2017-10-16 14:30"
+        end_date = "2017-10-16 15:00"
+
+        query_data = []
+        query_data.append(self.query_npm_node)
+        query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
+
+        action = self.get_action_instance(config=self.full_config)
+
+        action.connect = MagicMock(return_value="orion")
+        action.query = MagicMock(side_effect=query_data)
+        action.invoke = MagicMock(return_value="fake")
+
+        result = action.run("router1", start_date=start_date, end_date=end_date)
+        self.assertEqual(result, expected)
+
+    def test_no_input(self):
+        action = self.setup_node_exists()
+        self.assertRaises(ValueError,
+                          action.run,
+                          "router1")
 
     def test_run_unmanage_too_long(self):
         action = self.setup_node_exists()
         self.assertRaises(ValueError,
                           action.run,
                           "router1",
-                          90)
+                          minutes=90)

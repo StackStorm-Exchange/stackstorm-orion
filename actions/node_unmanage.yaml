@@ -14,4 +14,9 @@ parameters:
   minutes:
     type: "integer"
     description: "Number of minutes to unmanage a node for"
-    required: true
+  start_date:
+    type: "string"
+    description: "Date and time to unmanage node ex. 2017-10-13 11:00 (Y-m-d H:M)"
+  end_date:
+    type: "string"
+    description: "Date and time to remanage node ex. 2017-10-13 20:00 (Y-m-d H:M)"

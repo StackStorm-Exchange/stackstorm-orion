@@ -30,6 +30,9 @@ class OrionNode(object):
         self._npm_id = None
         self._ncm_id = None
         self._uri = None
+        self._agent = False
+        self._agent_id = None
+        self._agent_uri = None
 
     def __str__(self):
         return "{} (NodeId: {}; ip: {})".format(
@@ -107,3 +110,28 @@ class OrionNode(object):
     @uri.setter
     def uri(self, uri):
         self._uri = uri
+
+    @property
+    def agent_id(self):
+        return self._agent_id
+
+    @agent_id.setter
+    def agent_id(self, agent_id):
+        """
+        Set self._agent_id and update self._agent to True.
+        """
+        if agent_id is not None:
+            self._agent_id = agent_id
+            self._agent = True
+
+    @property
+    def agent(self):
+        return self._agent
+
+    @property
+    def agent_uri(self):
+        return self._agent_uri
+
+    @agent_uri.setter
+    def agent_uri(self, agent_uri):
+        self._agent_uri = agent_uri

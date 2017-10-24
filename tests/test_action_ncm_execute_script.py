@@ -52,6 +52,7 @@ class NcmExecuteScriptTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
         query_data.append({'results': [{"Status": 2,
                                         "UserName": "hubot",
                                         "DeviceOutput": "show failover",
