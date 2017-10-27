@@ -45,6 +45,7 @@ class ListNodeCustomPropertiesTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_no_results)
 
         action = self.get_action_instance(config=self.full_config)
 

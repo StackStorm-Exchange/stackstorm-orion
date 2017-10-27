@@ -43,6 +43,7 @@ class NodeStatusTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
         query_data.append({'results': [{'Status': 1}]})
 
         action = self.get_action_instance(config=self.full_config)
@@ -60,6 +61,7 @@ class NodeStatusTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
         query_data.append({'results': [{'Status': 2}]})
 
         action = self.get_action_instance(config=self.full_config)
@@ -77,6 +79,7 @@ class NodeStatusTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
         query_data.append({'results': [{'Status': 0}]})
 
         action = self.get_action_instance(config=self.full_config)
@@ -94,6 +97,7 @@ class NodeStatusTestCase(OrionBaseActionTestCase):
         query_data = []
         query_data.append(self.query_npm_node)
         query_data.append(self.query_ncm_node)
+        query_data.append(self.query_node_agent)
         query_data.append({'results': [{'Status': 3}]})
 
         action = self.get_action_instance(config=self.full_config)

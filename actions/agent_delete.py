@@ -26,11 +26,6 @@ class AgentDelete(OrionBaseAction):
 
         orion_node = self.get_node(node)
 
-        if not orion_node.npm:
-            raise ValueError("Node not found")
-
-        orion_node = self.get_agent(orion_node)
-
         if not orion_node.agent:
             raise ValueError("Agent not found")
 
