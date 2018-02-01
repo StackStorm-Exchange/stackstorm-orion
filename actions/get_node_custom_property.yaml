@@ -1,0 +1,17 @@
+---
+description: "Get an Orion Nodes custom property"
+enabled: true
+entry_point: 'get_node_custom_property.py'
+name: "get_node_custom_property"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  node:
+    type: "string"
+    description: "The node to poll in Orion."
+    required: true
+  custom_property:
+    type: "string"
+    description: "The custom property to get"
+    required: true
