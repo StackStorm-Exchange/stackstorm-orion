@@ -13,5 +13,5 @@ parameters:
     required: true
   custom_property:
     type: "string"
-    description: "The custom property to update"
+    description: "The custom property to get"
     required: true
