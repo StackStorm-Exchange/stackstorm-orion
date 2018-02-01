@@ -62,4 +62,3 @@ class GetNodeCustomPropertyTestCase(OrionBaseActionTestCase):
                           action.run,
                           "router1",
                           "City")
-
