@@ -63,12 +63,3 @@ class GetNodeCustomPropertyTestCase(OrionBaseActionTestCase):
                           "router1",
                           "City")
 
-    def test_run(self):
-        expected_output = True
-        test_data = {'results': [{'City': expected_output}]}
-
-        action = self.setup_node_exists()
-        action.query = MagicMock(return_value=test_data)
-
-        result_value = action.run("router1", "City")
-        self.assertEqual(result_value, expected_output)
