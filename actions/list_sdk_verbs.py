@@ -47,8 +47,8 @@ class ListSdkVerbs(OrionBaseAction):
 
         for item in orion_data['results']:
             if v_filter is not None:
-                if m.search(
-                        item['EntityName']) or m.search(item['MethodName']):
+                if ((item['EntityName'] and m.search(item['EntityName'])) or
+                   (item['MethodName'] and m.search(item['MethodName']))):
                     pass
                 else:
                     continue
