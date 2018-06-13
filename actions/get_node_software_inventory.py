@@ -42,7 +42,7 @@ class GetNodeSoftware(OrionBaseAction):
 
         try:
             orion_data = self.query(swql, **kargs)
-        except:
+        except Exception:
             orion_data['results'] = "empty"
 
         return orion_data

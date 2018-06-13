@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.7.3
+
+- Migrate maintainer to Encore Technologies <code@encore.tech>
+
+## 0.7.2
+
+- Minor linting fix
+
 ## 0.7
 
 - Addition of get_agent_id action
