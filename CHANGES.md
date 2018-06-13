@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.7.4
+
+- Added new action `get_node_custom_properties` to retrieve custom properties set on
+  a node object.
+- Fixed a bug in `list_sdk_verbs` that caused issues when the API returned `None` for
+  `EntityName` or `MethodName`
+
 ## 0.7.3
 
 - Migrate maintainer to Encore Technologies <code@encore.tech>
