@@ -1,0 +1,23 @@
+---
+description: "Query Solarwinds Orion using SWQL (SolarWinds Query language)"
+enabled: true
+entry_point: 'query_action.py'
+name: "query"
+pack: "orion"
+runner_type: "python-script"
+parameters:
+  query:
+    type: "string"
+    description: "Query string in SWQL syntax."
+    required: true
+  parameters:
+    type: "object"
+    description: >
+      For SWQL queries that are parameterized, this is a dict/object of parameters to
+      insert into the query.
+      Example:
+        query: "SELECT Uri FROM Orion.Pollers WHERE PollerID=@pollerid"
+        parameters:
+          pollerid: 9
+    required: false
+    default: {}

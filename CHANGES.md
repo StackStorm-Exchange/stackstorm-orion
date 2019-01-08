@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.5
+
+- Added a new aciton `query` that can be used to execute generic SWQL queries.
+  Contributed by Nick Maludy (Encore Technologies)
+
 ## 0.7.4
 
 - Added new action `get_node_custom_properties` to retrieve custom properties set on
