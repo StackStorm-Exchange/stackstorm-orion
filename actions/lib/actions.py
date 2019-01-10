@@ -102,32 +102,49 @@ class OrionBaseAction(Action):
                 except IndexError:
                     pass
 
-            swql_agent = """SELECT AgentID, Uri
-            FROM Orion.AgentManagement.Agent
-            WHERE NodeId=@query_on"""
-            kargs = {'query_on': orion_node.npm_id}
-            data_agent = self.query(swql_agent, **kargs)
+            data_agent = self.get_agent(orion_node.npm_id)
 
-            # Since there might not always be an agent we
-            # will not raise if the results do not return anything
-            if 'results' not in data_agent:
-                msg = "No results from Orion Agent: {}".format(data_agent)
-                self.logger.info(msg)
-
-            if len(data_agent['results']) == 1:
+            if data_agent:
                 try:
-                    orion_node.agent_id = data_agent['results'][0]['AgentID']
-                    orion_node.agent_uri = data_agent['results'][0]['Uri']
+                    orion_node.agent_id = data_agent['AgentID']
+                    orion_node.agent_uri = data_agent['Uri']
                 except IndexError:
                     pass
-            elif len(data_agent['results']) >= 2:
-                self.logger.debug(
-                    "Muliple Nodes match '{}' Caption: {}".format(
-                        orion_node.npm_id, data_agent))
-                raise ValueError("Muliple Nodes match '{}' Caption".format(
-                    orion_node.npm_id))
 
         return orion_node
+
+    def get_agent(self, query_param):
+        """ Searches for an agent by the ip address or the
+        node_id
+        """
+        if is_ip(query_param):
+            query_for_where = "IP"
+        elif isinstance(query_param, int):
+            query_for_where = "NodeId"
+        else:
+            query_for_where = "Name"
+
+        swql_agent = """SELECT AgentID, Uri
+        FROM Orion.AgentManagement.Agent
+        WHERE {}=@query_on""".format(query_for_where)
+        kargs = {'query_on': query_param}
+        data_agent = self.query(swql_agent, **kargs)
+
+        # Since there might not always be an agent we
+        # will not raise if the results do not return anything
+        if 'results' not in data_agent:
+            msg = "No results from Orion Agent: {}".format(data_agent)
+            self.logger.info(msg)
+            return None
+
+        if len(data_agent['results']) >= 2:
+            self.logger.debug(
+                "Muliple Nodes match '{}' Caption: {}".format(
+                    orion_node.npm_id, data_agent))
+            raise ValueError("Muliple Nodes match '{}' Caption".format(
+                orion_node.npm_id))
+
+        return data_agent['results'][0]
 
     def query(self, swql, **kargs):
         """
