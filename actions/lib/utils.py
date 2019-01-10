@@ -16,6 +16,8 @@
 import socket
 import operator
 
+from functools import reduce
+
 
 def status_code_to_text(status):
     """
