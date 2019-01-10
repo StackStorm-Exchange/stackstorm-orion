@@ -48,6 +48,7 @@ snmp_internal: "SNMP community to use if internal specified"
 * `node_status` - Query Solarwinds Orion for a node's status (i.e. Up/Down)
 * `node_unmanage` - Unmanage an Solarwinds Orion node
 * `nodes_pollnow` - Force muliple polls of a list of Solarwinds Orion nodes.
+* `query` - Execute generic SWQL queries.
 * `start_discovery` - Create a discovery profile in Solarwinds Orion.
 * `update_node_custom_properties` - Update an Orion Nodes custom properties
 * `update_node_poller` - Update an Orion Nodes poller
