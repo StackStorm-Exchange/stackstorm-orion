@@ -132,17 +132,17 @@ class OrionBaseAction(Action):
 
         # Since there might not always be an agent we
         # will not raise if the results do not return anything
-        if 'results' not in data_agent:
-            msg = "No results from Orion Agent: {}".format(data_agent)
+        if 'results' not in data_agent or len(data_agent['results']) == 0:
+            msg = "No Orion Agent found: {}".format(data_agent)
             self.logger.info(msg)
             return None
 
         if len(data_agent['results']) >= 2:
             self.logger.debug(
-                "Muliple Nodes match '{}' Caption: {}".format(
-                    orion_node.npm_id, data_agent))
-            raise ValueError("Muliple Nodes match '{}' Caption".format(
-                orion_node.npm_id))
+                "Muliple Agents match '{}' Caption: {}".format(
+                    query_param, data_agent))
+            raise ValueError("Muliple Agents match '{}' Caption".format(
+                query_param))
 
         return data_agent['results'][0]
 

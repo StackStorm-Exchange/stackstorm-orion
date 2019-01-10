@@ -31,14 +31,8 @@ class AgentDeleteTestCase(OrionBaseActionTestCase):
         action = self.setup_connect_fail()
         self.assertRaises(ValueError, action.run)
 
-    def test_run_node_fail(self):
-        action = self.setup_query_blank_results()
-        self.assertRaises(ValueError,
-                          action.run,
-                          "router1")
-
     def test_run_agent_fail(self):
-        action = self.setup_node_exists()
+        action = self.setup_query_blank_results()
         self.assertRaises(ValueError,
                         action.run,
                         "router1")
