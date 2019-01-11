@@ -96,7 +96,9 @@ def is_ip(ip_address):
     Returns:
        bool: True if an IP address, False if not.
     """
-    if "." in ip_address:
+    if isinstance(ip_address, int):
+        return False
+    elif "." in ip_address:
         family = socket.AF_INET
     elif ":" in ip_address:
         family = socket.AF_INET6

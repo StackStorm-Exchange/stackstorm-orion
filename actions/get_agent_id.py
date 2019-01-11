@@ -24,9 +24,9 @@ class GetAgentId(OrionBaseAction):
 
         self.connect()
 
-        orion_data = self.get_node(node)
+        orion_data = self.get_agent(node)
 
-        if not orion_data.agent:
+        if not orion_data:
             raise ValueError("Agent not found")
 
-        return orion_data.agent_id
+        return orion_data['AgentID']
