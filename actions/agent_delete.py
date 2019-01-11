@@ -24,12 +24,12 @@ class AgentDelete(OrionBaseAction):
 
         self.connect()
 
-        orion_node = self.get_node(node)
+        orion_agent = self.get_agent(node)
 
-        if not orion_node.agent:
+        if not orion_agent:
             raise ValueError("Agent not found")
 
-        orion_data = self.delete(orion_node.agent_uri)
+        orion_data = self.delete(orion_agent['Uri'])
 
         # This Delete always returns None, so check and return True
         if orion_data is None:
