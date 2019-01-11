@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.6
+
+- Added the ability to get agent information without getting the node.
+  Contributed by Bradley Bishop (Encore Technologies)
+
 ## 0.7.5
 
 - Added a new aciton `query` that can be used to execute generic SWQL queries.
