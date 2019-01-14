@@ -12,7 +12,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 
-from mock import MagicMock
+from mock import patch
 
 from orion_base_action_test_case import OrionBaseActionTestCase
 
@@ -27,18 +27,19 @@ class QueryTestCase(OrionBaseActionTestCase):
     __test__ = True
     action_cls = QueryAction
 
-    def test_query_with_params(self):
+    @patch('query_action.QueryAction.query')
+    @patch('query_action.QueryAction.connect')
+    def test_query_with_params(self, mock_connect, mock_query):
         query = "SELECT Uri FROM Orion.Pollers WHERE PollerID=@pollerid"
         parameters = {"pollerid": 9}
 
         expected = {'blah': 'router1 (NodeId: 1; ip: 192.168.0.1)'}
+        mock_query.return_value = expected
 
         action = self.get_action_instance(config=self.full_config)
-        action.connect = MagicMock(return_value="orion")
-        action.query = MagicMock(return_value=expected)
 
         result = action.run(query, parameters)
         self.assertEquals(result, expected)
 
-        action.connect.assert_called()
-        action.query.assert_called_with(query, **parameters)
+        mock_connect.assert_called_with()
+        mock_query.assert_called_with(query, **parameters)
