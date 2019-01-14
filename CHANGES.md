@@ -53,7 +53,7 @@
 - Added example configuration file
 - Updated README, added actions
 
-## 0.5
+## 0.5.0
 
 - Renamed node\_pollnow action to nodes\_pollnow and extended it to
   support multiple nodes, count of polls and a pause between them.
