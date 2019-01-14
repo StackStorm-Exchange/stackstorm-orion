@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.7
+
+- Added badges to README and fixed unit tests.
+  Contributed by Nick Maludy (Encore Technologies)
+
 ## 0.7.6
 
 - Added the ability to get agent information without getting the node.
