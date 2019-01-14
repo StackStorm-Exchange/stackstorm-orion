@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.7
+
+- Added badges to README and fixed unit tests.
+  Contributed by Nick Maludy (Encore Technologies) #17
+
 ## 0.7.6
 
 - Added the ability to get agent information without getting the node.
@@ -48,7 +53,7 @@
 - Added example configuration file
 - Updated README, added actions
 
-## 0.5
+## 0.5.0
 
 - Renamed node\_pollnow action to nodes\_pollnow and extended it to
   support multiple nodes, count of polls and a pause between them.

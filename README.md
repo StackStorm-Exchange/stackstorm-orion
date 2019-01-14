@@ -1,3 +1,5 @@
+[![Build Status](https://circleci.com/gh/StackStorm-Exchange/stackstorm-orion.svg?style=shield&circle-token=:circle-token)](https://circleci.com/gh/StackStorm-Exchange/stackstorm-orion) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+
 # Solarwinds Orion Integration Pack
 
 This pack integrates with Solarwinds Orion (a commercial monitoring
