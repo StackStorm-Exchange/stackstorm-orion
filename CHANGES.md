@@ -2,7 +2,8 @@
 
 ## 0.7.8
 
-- Fixed issue where get_node_id can return a null
+- Fixed issue where get_node_id can return a null.
+- Silenced SSL warnings.
   Contributed by Bradley Bishop (Encore Technologies)
 
 ## 0.7.7
