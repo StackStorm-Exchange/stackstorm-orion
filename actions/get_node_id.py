@@ -25,5 +25,7 @@ class GetNodeId(OrionBaseAction):
         self.connect()
 
         orion_data = self.get_node(node)
+        if not orion_data.npm_id:
+            return (False, "No Nodes match '{}'".format(node))
 
         return orion_data.npm_id
