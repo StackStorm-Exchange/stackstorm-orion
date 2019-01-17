@@ -21,6 +21,10 @@ from orionsdk import SwisClient
 from lib.node import OrionNode
 from lib.utils import send_user_error, is_ip
 
+# Silence ssl warnings
+import requests
+requests.packages.urllib3.disable_warnings()  # pylint: disable=no-member
+
 
 class OrionBaseAction(Action):
     def __init__(self, config):

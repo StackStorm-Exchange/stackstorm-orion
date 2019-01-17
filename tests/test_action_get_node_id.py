@@ -30,3 +30,9 @@ class GetNodeIdTestCase(OrionBaseActionTestCase):
     def test_run_connect_fail(self):
         action = self.setup_connect_fail()
         self.assertRaises(ValueError, action.run)
+
+    def test_run_get_node_fail(self):
+        expected_return = (False, "No Nodes match 'router1'")
+        action = self.setup_query_blank_results()
+        result = action.run("router1")
+        self.assertEqual(result, expected_return)
