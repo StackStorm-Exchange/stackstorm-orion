@@ -45,7 +45,7 @@ class ListNodeByPoller(OrionBaseAction):
 
         kargs = {'EngineID': engine_id}
 
-        if not status == "Any":
+        if status != "Any":
             status_id = status_text_to_code(status)
             swql += " and Status=@Status"
             kargs['Status'] = status_id

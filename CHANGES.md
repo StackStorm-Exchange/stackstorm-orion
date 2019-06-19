@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.10
+
+- More linting fixes
+
 ## 0.7.9
 
 - Minor linting fix
