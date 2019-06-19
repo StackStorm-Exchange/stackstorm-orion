@@ -103,4 +103,4 @@ class NodesPollNow(OrionBaseAction):
                         "PollNow",
                         npm_id)
         else:
-                time.sleep(pause)
+            time.sleep(pause)
