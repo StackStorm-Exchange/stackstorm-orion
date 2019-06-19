@@ -33,9 +33,7 @@ class NodeDeleteTestCase(OrionBaseActionTestCase):
 
     def test_run_node_fail(self):
         action = self.setup_query_blank_results()
-        self.assertRaises(ValueError,
-                        action.run,
-                        "router1")
+        self.assertRaises(ValueError, action.run, "router1")
 
     def test_run(self):
         action = self.setup_node_exists()

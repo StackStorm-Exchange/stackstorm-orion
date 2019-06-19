@@ -33,6 +33,4 @@ class GetAgentIdTestCase(OrionBaseActionTestCase):
 
     def test_run_agent_fail(self):
         action = self.setup_query_blank_results()
-        self.assertRaises(ValueError,
-                        action.run,
-                        "router1")
+        self.assertRaises(ValueError, action.run, "router1")
