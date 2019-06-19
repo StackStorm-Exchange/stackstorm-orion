@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.9
+
+- Minor linting fix
+
 ## 0.7.8
 
 - Fixed issue where get_node_id can return a null.
