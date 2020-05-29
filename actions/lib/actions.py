@@ -95,7 +95,6 @@ class OrionBaseAction(Action):
             kargs = {'CoreNodeID': orion_node.npm_id}
             try:
                 data_ncm = self.query(swql_ncm, **kargs)
-                data_ncm.raise_for_status()
             except:
                 msg = "Connection to NCM failed. NCM tables not available"
                 self.logger.info(msg)
