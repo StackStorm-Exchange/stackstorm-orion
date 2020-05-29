@@ -95,8 +95,9 @@ class OrionBaseAction(Action):
             kargs = {'CoreNodeID': orion_node.npm_id}
             try:
                 data_ncm = self.query(swql_ncm, **kargs)
-            except HTTPError:
-                msg = "Connection to NCM failed: {}".format(http_error_msg)
+                data_ncm.raise_for_status()
+            except HTTPError as http_err:
+                msg = "Connection to NCM failed: {}".format(http_err)
                 self.logger.info(msg)
 
             # Don't raise an exception if this fails.
