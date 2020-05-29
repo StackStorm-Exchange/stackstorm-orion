@@ -29,7 +29,6 @@ parameters:
       - "snmpv3"
       - "wmi"
     default: "snmpv2"
-    immutable: true
   community:
     type: "string"
     description: "The SNMP community to use (don't set *std_community*)."
