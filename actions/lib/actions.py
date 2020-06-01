@@ -96,7 +96,7 @@ class OrionBaseAction(Action):
             try:
                 data_ncm = self.query(swql_ncm, **kargs)
             except:
-                # Create an empty dict to allow remianing code to fail gracefully
+                # Create an empty dict to allow remaining code to fail gracefully
                 data_ncm = {}
                 msg = "Connection to NCM failed. NCM not installed"
                 self.logger.info(msg)
