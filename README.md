@@ -46,6 +46,7 @@ snmp_internal: "SNMP community to use if internal specified"
 * `ncm_execute_script` - Execute an script on an Orion NCM Node.
 * `node_create` - Create an node in Solarwinds Orion.
 * `node_discover_and_add_interfaces` - Discover and add Interfaces for a Solarwinds Orion node.
+* `node_maintenance_mode_change` - Enable/disable maintenance mode to suppress/resume alerts for a given node
 * `node_remanage` - Re-manage a Solarwinds Orion nodes
 * `node_status` - Query Solarwinds Orion for a node's status (i.e. Up/Down)
 * `node_unmanage` - Unmanage an Solarwinds Orion node
