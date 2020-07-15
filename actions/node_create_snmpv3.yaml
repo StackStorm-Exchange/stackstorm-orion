@@ -1,0 +1,56 @@
+---
+description: "Create an node in Solarwinds Orion."
+enabled: true
+entry_point: 'node_create.py'
+name: "node_create"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  node:
+    type: "string"
+    description: "The Caption for the node to add to Orion."
+    required: true
+  ip_address:
+    type: "string"
+    required: true
+    description: "The ip address to use for polling."
+  poller:
+    type: "string"
+    description: "The name of the additional polling engine to use (defaults to primary)."
+    default: "primary"
+  snmpv3_username:
+    type: "string"
+    required: true
+    description: "The SNMPv3 Username used to poll SNMP from remote device."
+  privacy_method:
+    type: "string"
+    description: "The SNMPv3 Privacy method used for SNMP polling."
+    enum:
+      - "MD5"
+      - "SHA1"
+    default: "SHA1"
+  privacy_password:
+    type: "string"
+    required: true
+    description: "The SNMPv3 Privacy password used to poll SNMP from remote device."
+  auth_method:
+    type: "string"
+    description: "The SNMPv3 Authentication method used for SNMP polling."
+    enum:
+      - "DES56"
+      - "AES128"
+      - "AES192"
+      - "AES256"
+    default: "AES128"
+  auth_password:
+    type: "string"
+    required: true
+    description: "The SNMPv3 Authentication password used to poll SNMP from remote device."
+  status:
+    type: "string"
+    enum:
+      - "snmp"
+      - "icmp"
+    description: "Protocol to use for Status and Response Time checks."
+    default: "snmp"
