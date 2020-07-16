@@ -114,6 +114,6 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
                 self.logger.info('Interface: {} NOT included in list to be monitored.  Removing...'.format(
                     interface['IfName']))
                 self.delete(interface['Uri'])
-                results['removed'].append(interface['ifName'])
+                results['removed'].append(interface['IfName'])
 
         return results
