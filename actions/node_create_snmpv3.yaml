@@ -27,9 +27,11 @@ parameters:
     type: "string"
     description: "The SNMPv3 Privacy method used for SNMP polling."
     enum:
-      - "MD5"
-      - "SHA1"
-    default: "SHA1"
+      - "DES56"
+      - "AES128"
+      - "AES192"
+      - "AES256"
+    default: "AES128"
   privacy_password:
     type: "string"
     required: true
@@ -38,11 +40,9 @@ parameters:
     type: "string"
     description: "The SNMPv3 Authentication method used for SNMP polling."
     enum:
-      - "DES56"
-      - "AES128"
-      - "AES192"
-      - "AES256"
-    default: "AES128"
+      - "MD5"
+      - "SHA1"
+    default: "SHA1"
   auth_password:
     type: "string"
     required: true
