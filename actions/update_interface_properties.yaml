@@ -1,0 +1,25 @@
+---
+description: "Update an NPM interfaces property of an Interface on an Orion Node"
+enabled: true
+entry_point: 'update_interface_properties.py'
+name: "update_interface_properties"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  node:
+    type: "string"
+    description: "The node to poll in Orion."
+    required: true
+  interface:
+    type: "string"
+    description: "The node to poll in Orion."
+    required: true
+  property:
+    type: "string"
+    description: "Name of the property to update"
+    required: true
+  value:
+    type: "string"
+    description: "The value to apply to the custom property"
+    required: true
