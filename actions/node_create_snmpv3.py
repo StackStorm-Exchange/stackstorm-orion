@@ -25,9 +25,9 @@ class NodeCreate(OrionBaseAction):
             ip_address,
             poller,
             snmpv3_username,
-            privacy_method,
+            privacy_protocol,
             privacy_password,
-            auth_method,
+            auth_protocol,
             auth_password,
             status):
         """

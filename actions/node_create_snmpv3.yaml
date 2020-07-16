@@ -14,7 +14,7 @@ parameters:
   ip_address:
     type: "string"
     required: true
-    description: "The ip address to use for polling."
+    description: "The IP address to use for polling."
   poller:
     type: "string"
     description: "The name of the additional polling engine to use (defaults to primary)."
@@ -23,9 +23,9 @@ parameters:
     type: "string"
     required: true
     description: "The SNMPv3 Username used to poll SNMP from remote device."
-  privacy_method:
+  privacy_protocol:
     type: "string"
-    description: "The SNMPv3 Privacy method used for SNMP polling."
+    description: "The SNMPv3 Privacy protocol used for SNMP polling."
     enum:
       - "DES56"
       - "AES128"
@@ -36,9 +36,9 @@ parameters:
     type: "string"
     required: true
     description: "The SNMPv3 Privacy password used to poll SNMP from remote device."
-  auth_method:
+  auth_protocol:
     type: "string"
-    description: "The SNMPv3 Authentication method used for SNMP polling."
+    description: "The SNMPv3 Authentication protocol used for SNMP polling."
     enum:
       - "MD5"
       - "SHA1"
