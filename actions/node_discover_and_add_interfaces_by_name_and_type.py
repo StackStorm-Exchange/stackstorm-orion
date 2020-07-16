@@ -43,6 +43,7 @@ class NodeDiscoverAndAddInterfaces(OrionBaseAction):
 
         add_interfaces = []
         for interface in Discoverdinterfaces['DiscoveredInterfaces']:
+            self.logger.info(interface)
             # Unmonitored interfaces have an InterfaceID of 0.
             if not interface['InterfaceID'] == 0:
                 self.logger.info("Skipping {} as monitored (I:{})".format(
