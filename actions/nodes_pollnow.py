@@ -99,7 +99,7 @@ class NodesPollNow(OrionBaseAction):
                 self.orion_nodes.remove(npm_id)
                 self.results['down'].append(npm_id)
 
-            self.invoke("Orion.Nods",
+            self.invoke("Orion.Nodes",
                         "PollNow",
                         npm_id)
         else:
