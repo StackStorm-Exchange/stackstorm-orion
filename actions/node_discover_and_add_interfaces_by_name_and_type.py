@@ -100,7 +100,7 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
 
         # Add NodeID variable info to query string
         query = 'SELECT NodeID, Name, Alias, IfName, InterfaceAlias, Uri FROM Orion.NPM.Interfaces WHERE NodeID=' + \
-                orion_node.npm_id
+                str(orion_node.npm_id)
 
         # Query for the complete list of interfaces that were added to Solarwinds for monitoring
         npminterfaces = self.query(query)
