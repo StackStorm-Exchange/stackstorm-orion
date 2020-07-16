@@ -59,20 +59,20 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
 
                 # admin_up_required is defined as boolean in YAML file
                 if admin_up_required:
-                    # interface_type is defined as array in YAML file and should provide a list of numerical interface
-                    # types that should be added by default
+                    # Loop through values in interface_type list, compare to Discovered interface data and add
+                    # interfaces with IfType values that match what is provided in list and have the IfAdminStatus
+                    # value as "UP" or 1
                     for iftype in interface_type:
-                        self.logger.debug('Admin Up Required: {}'.format(admin_up_required))
-                        self.logger.debug('Checking for interface type: {}'.format(iftype))
                         if interface['ifAdminStatus'] == 1 and interface['ifType'] == iftype:
                             self.logger.info('Interface: {} is of IfType: {}. Adding...'.format(
                                 interface['Caption'],
                                 interface['ifType']))
                             add_interfaces.append(interface)
                 else:
+                    # Loop through values in interface_type list, compare to Discovered interface data and add
+                    # interfaces with IfType values that match what is provided in list without checking the
+                    # IfAdminStatus value
                     for iftype in interface_type:
-                        self.logger.debug('Admin Up Required: {}'.format(admin_up_required))
-                        self.logger.debug('Checking for interface type: {}'.format(iftype))
                         if interface['ifType'] == iftype:
                             self.logger.info('Interface: {} is of IfType: {}. Adding...'.format(
                                 interface['Caption'],
@@ -91,21 +91,18 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
         self.logger.info('Querying list of monitored interfaces from Solarwinds...')
 
         # Add NodeID variable info to query string
-        query = 'SELECT NodeID, Name, Alias, IfName, InterfaceAlias, Uri FROM Orion.NPM.Interfaces WHERE NodeID=' + \
-                str(orion_node.npm_id)
-
-        self.logger.debug('Query String: {}'.format(query))
+        query = 'SELECT NodeID, InterfaceID, Name, Alias, IfName, InterfaceAlias, Uri FROM Orion.NPM.Interfaces ' \
+                'WHERE NodeID=' + str(orion_node.npm_id)
 
         # Query for the complete list of interfaces that were added to Solarwinds for monitoring
         npminterfaces = self.query(query)
 
-        self.logger.debug('NPM Interfaces: {}'.format(npminterfaces['results']))
-
+        # Loop through query results and compare IfName data to interface_name list and remove entries not in list
         for interface in npminterfaces['results']:
             if interface['IfName'] not in interface_names:
                 self.logger.info('Interface: {} NOT included in list to be monitored.  Removing...'.format(
                     interface['IfName']))
                 self.delete(interface['Uri'])
-                results['removed'].append(interface['IfName'])
+                results['removed'].append({interface['IfName']: interface['InterfaceID']})
 
         return results
