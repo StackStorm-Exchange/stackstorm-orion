@@ -17,12 +17,15 @@ from lib.actions import OrionBaseAction
 
 
 class NodeDiscoverAndAddInterfaces(OrionBaseAction):
-    def run(self, node):
+    def run(self, node, admin_up_required, interface_names, interface_type):
         """
         Discover and add interfaces on an Orion node
 
         Args:
            node: Node to discover and add interfaces on.
+           admin_up_required: Filter add interfaces by ifAdminStatus up or not
+           interface_names: List of ifName values to filter add interfaces
+           interface_type: List of ifType values to filter add interfaces
 
         """
         results = {'added': [], 'existing': []}
