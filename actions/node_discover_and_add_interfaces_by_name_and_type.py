@@ -102,8 +102,12 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
         query = 'SELECT NodeID, Name, Alias, IfName, InterfaceAlias, Uri FROM Orion.NPM.Interfaces WHERE NodeID=' + \
                 str(orion_node.npm_id)
 
+        self.logger.info('Query String: {}').format(query)
+
         # Query for the complete list of interfaces that were added to Solarwinds for monitoring
         npminterfaces = self.query(query)
+
+        self.logger.info('NPM Interfaces: {}').format(npminterfaces['results'])
 
         for interface in npminterfaces['results']:
             if interface['IfName'] not in interface_names:
