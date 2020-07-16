@@ -51,6 +51,11 @@ class NodeDiscoverAndAddInterfaces(OrionBaseAction):
                 results['existing'].append(
                     {interface['Caption']: interface['InterfaceID']})
             else:
+                self.logger.info("Interface {} NOT monitored. (ID:{} Type:{} Status{} )".format(
+                    interface['Caption'],
+                    interface['InterfaceID'],
+                    interface['ifType'],
+                    interface[ifAdminStatus]))
                 # admin_up_required is defined as boolean in YAML file
                 if admin_up_required is True:
                     # interface_type is defined as array in YAML file and should provide a list of numerical interface
