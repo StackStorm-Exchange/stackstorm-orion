@@ -9,5 +9,5 @@ runner_type: "python-script"
 parameters:
   node:
     type: "string"
-    description: "The node to unmanage in Orion."
+    description: "The node to add the interfaces to in Orion."
     required: true
