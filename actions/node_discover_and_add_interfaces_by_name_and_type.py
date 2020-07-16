@@ -74,9 +74,18 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
                             add_interfaces.append(interface)
                 else:
                     for iftype in interface_type:
+                        self.logger.info('Admin Up Required: {}'.format(admin_up_required))
+                        self.logger.info('Checking for interface type: {}'.format(iftype))
                         if interface['ifType'] == iftype:
+                            self.logger.info(
+                                "Interface {} is of type {}. Adding...(ID:{} Type:{} Admin Status:{} )".format(
+                                    interface['Caption'],
+                                    iftype,
+                                    interface['InterfaceID'],
+                                    interface['ifType'],
+                                    interface['ifAdminStatus']))
                             add_interfaces.append(interface)
-
+        self.logger.info('Adding interfaces to monitoring...')
         additions = self.invoke('Orion.NPM.Interfaces',
                                 'AddInterfacesOnNode',
                                 orion_node.npm_id,
