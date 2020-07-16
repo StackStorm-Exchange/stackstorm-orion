@@ -20,6 +20,13 @@ class UpdateInterfaceProperties(OrionBaseAction):
     def run(self, node, interface, property, value):
         """
         Update the Custom Properties of an Interface on a Node in Solarwinds.
+
+        Args:
+            node: Name of the Node to apply the changes to
+            interface: Name of the interface to be updated
+            property: Name of the NPM.interface table property to be updated
+            value: The new value to apply to the interface custom property
+
         """
         self.connect()
 
