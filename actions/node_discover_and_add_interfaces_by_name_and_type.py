@@ -16,7 +16,7 @@
 from lib.actions import OrionBaseAction
 
 
-class NodeDiscoverAndAddInterfaces(OrionBaseAction):
+class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
     def run(self, node, admin_up_required, interface_names, interface_type):
         """
         Discover and add interfaces on an Orion node
