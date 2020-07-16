@@ -28,7 +28,7 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
            interface_type: List of ifType values to filter add interfaces
 
         """
-        results = {'added': [], 'existing': []}
+        results = {'added': [], 'existing': [], 'removed': []}
 
         self.connect()
 
@@ -65,20 +65,21 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
                         self.logger.info('Admin Up Required: {}'.format(admin_up_required))
                         self.logger.info('Checking for interface type: {}'.format(iftype))
                         if interface['ifAdminStatus'] == 1 and interface['ifType'] == iftype:
-                            self.logger.info("Interface {} is of type {}. Adding...(ID:{} Type:{} Admin Status:{} )".format(
-                                interface['Caption'],
-                                iftype,
-                                interface['InterfaceID'],
-                                interface['ifType'],
-                                interface['ifAdminStatus']))
+                            self.logger.info(
+                                "Interface {} is of type {}. Adding...(ID:{} Type:{} Admin Status:{} )".format(
+                                    interface['Caption'],
+                                    iftype,
+                                    interface['InterfaceID'],
+                                    interface['ifType'],
+                                    interface['ifAdminStatus']))
                             add_interfaces.append(interface)
                 else:
                     for iftype in interface_type:
                         self.logger.info('Admin Up Required: {}'.format(admin_up_required))
                         self.logger.info('Checking for interface type: {}'.format(iftype))
                         if interface['ifType'] == iftype:
-                            self.logger.info(
-                                "Interface {} is of type {}. Adding...(ID:{} Type:{} Admin Status:{} )".format(
+                            self.logger.info("Interface {} is of type {}. Adding...(ID:{} Type:{} "
+                                             "Admin Status:{} )".format(
                                     interface['Caption'],
                                     iftype,
                                     interface['InterfaceID'],
@@ -94,5 +95,18 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
 
         for i in additions['DiscoveredInterfaces']:
             results['added'].append({i['Caption']: i['InterfaceID']})
+
+        # Query for the complete list of interfaces that were added to Solarwinds for monitoring
+
+        self.logger.info('Querying list of monitored interfaces from Solarwinds...')
+        npminterfaces = self.query('SELECT NodeID, Name, Alias, IfName, InterfaceAlias, Uri FROM '
+                                   'Orion.NPM.Interfaces WHERE NodeID=orion_node.npm_id')
+
+        for interface in npminterfaces['results']:
+            if interface['IfName'] not in interface_names:
+                self.logger.info('Interface:', {}, 'NOT in list to be monitored.  Removing...').format(
+                                    interface['IfName'])
+                self.delete(interface['Uri'])
+                results['removed'].append(interface['ifName'])
 
         return results
