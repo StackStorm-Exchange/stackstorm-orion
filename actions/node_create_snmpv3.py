@@ -19,7 +19,7 @@ from lib.actions import OrionBaseAction
 from lib.utils import send_user_error
 
 
-class NodeCreate(OrionBaseAction):
+class NodeCreateSNMPv3(OrionBaseAction):
     def run(self,
             node,
             ip_address,
