@@ -13,7 +13,7 @@ parameters:
     required: true
   interface:
     type: "string"
-    description: "The node to poll in Orion."
+    description: "The Name (IfName) of the NPM interface to be updated."
     required: true
   property:
     type: "string"
