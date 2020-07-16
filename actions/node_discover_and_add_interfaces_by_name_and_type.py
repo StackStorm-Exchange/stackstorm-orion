@@ -80,11 +80,11 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
                         if interface['ifType'] == iftype:
                             self.logger.info("Interface {} is of type {}. Adding...(ID:{} Type:{} "
                                              "Admin Status:{} )".format(
-                                    interface['Caption'],
-                                    iftype,
-                                    interface['InterfaceID'],
-                                    interface['ifType'],
-                                    interface['ifAdminStatus']))
+                                interface['Caption'],
+                                iftype,
+                                interface['InterfaceID'],
+                                interface['ifType'],
+                                interface['ifAdminStatus']))
                             add_interfaces.append(interface)
         self.logger.info('Adding interfaces to monitoring...')
         additions = self.invoke('Orion.NPM.Interfaces',
@@ -96,16 +96,19 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
         for i in additions['DiscoveredInterfaces']:
             results['added'].append({i['Caption']: i['InterfaceID']})
 
-        # Query for the complete list of interfaces that were added to Solarwinds for monitoring
-
         self.logger.info('Querying list of monitored interfaces from Solarwinds...')
-        npminterfaces = self.query('SELECT NodeID, Name, Alias, IfName, InterfaceAlias, Uri FROM '
-                                   'Orion.NPM.Interfaces WHERE NodeID=orion_node.npm_id')
+
+        # Add NodeID variable info to query string
+        query = 'SELECT NodeID, Name, Alias, IfName, InterfaceAlias, Uri FROM Orion.NPM.Interfaces WHERE NodeID=' + \
+                orion_node.npm_id
+
+        # Query for the complete list of interfaces that were added to Solarwinds for monitoring
+        npminterfaces = self.query(query)
 
         for interface in npminterfaces['results']:
             if interface['IfName'] not in interface_names:
                 self.logger.info('Interface:', {}, 'NOT included in list to be monitored.  Removing...').format(
-                                    interface['IfName'])
+                    interface['IfName'])
                 self.delete(interface['Uri'])
                 results['removed'].append(interface['ifName'])
 
