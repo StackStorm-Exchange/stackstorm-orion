@@ -58,9 +58,11 @@ class NodeDiscoverAndAddInterfaces(OrionBaseAction):
                     interface['ifAdminStatus']))
                 # admin_up_required is defined as boolean in YAML file
                 if admin_up_required is True:
+                    self.logger.info('Admin Up Status:{}'.format(admin_up_required))
                     # interface_type is defined as array in YAML file and should provide a list of numerical interface
                     # types that should be added by default
                     for type in interface_type:
+                        self.logger.info('Checking for interface type:{}'.format(type))
                         if interface['ifAdminStatus'] == 1 and interface['ifType'] == type:
                             self.logger.info("Interface {} is of type {}. Adding...(ID:{} Type:{} Status:{} )".format(
                                 interface['Caption'],
