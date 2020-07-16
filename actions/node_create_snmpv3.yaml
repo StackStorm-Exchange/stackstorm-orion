@@ -1,7 +1,7 @@
 ---
-description: "Create an node in Solarwinds Orion."
+description: "Create an node using SNMPv3 in Solarwinds Orion."
 enabled: true
-entry_point: 'node_create.py'
+entry_point: 'node_create_snmpv3.py'
 name: "node_create"
 pack: "orion"
 runner_type: "python-script"
