@@ -43,7 +43,6 @@ class NodeDiscoverAndAddInterfaces(OrionBaseAction):
 
         add_interfaces = []
         for interface in Discoverdinterfaces['DiscoveredInterfaces']:
-            self.logger.info(interface)
             # Unmonitored interfaces have an InterfaceID of 0.
             if not interface['InterfaceID'] == 0:
                 self.logger.info("Skipping {} as monitored (I:{})".format(
@@ -52,7 +51,7 @@ class NodeDiscoverAndAddInterfaces(OrionBaseAction):
                 results['existing'].append(
                     {interface['Caption']: interface['InterfaceID']})
             else:
-                self.logger.info("Interface {} NOT monitored. (ID:{} Type:{} Status{} )".format(
+                self.logger.info("Interface {} NOT monitored. (ID:{} Type:{} Status:{} )".format(
                     interface['Caption'],
                     interface['InterfaceID'],
                     interface['ifType'],
@@ -63,6 +62,12 @@ class NodeDiscoverAndAddInterfaces(OrionBaseAction):
                     # types that should be added by default
                     for type in interface_type:
                         if interface['ifAdminStatus'] == 1 and interface['ifType'] == type:
+                            self.logger.info("Interface {} is of type {}. Adding...(ID:{} Type:{} Status:{} )".format(
+                                interface['Caption'],
+                                type,
+                                interface['InterfaceID'],
+                                interface['ifType'],
+                                interface['ifAdminStatus']))
                             add_interfaces.append(interface)
                 else:
                     for type in interface_type:
