@@ -26,7 +26,4 @@ parameters:
     type: "boolean"
     description: "Require the interface to be admin status (ifAdminStatus) to be up (1) in order to be added"
     required: true
-    enum:
-      - True
-      - False
     default: True
