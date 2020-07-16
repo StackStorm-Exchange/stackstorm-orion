@@ -104,7 +104,7 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
 
         for interface in npminterfaces['results']:
             if interface['IfName'] not in interface_names:
-                self.logger.info('Interface:', {}, 'NOT in list to be monitored.  Removing...').format(
+                self.logger.info('Interface:', {}, 'NOT included in list to be monitored.  Removing...').format(
                                     interface['IfName'])
                 self.delete(interface['Uri'])
                 results['removed'].append(interface['ifName'])
