@@ -51,29 +51,30 @@ class NodeDiscoverAndAddInterfaces(OrionBaseAction):
                 results['existing'].append(
                     {interface['Caption']: interface['InterfaceID']})
             else:
-                self.logger.info("Interface {} NOT monitored. (ID:{} Type:{} Status:{} )".format(
+                self.logger.info("Interface {} NOT monitored. (ID:{} Type:{} Admin Status:{} )".format(
                     interface['Caption'],
                     interface['InterfaceID'],
                     interface['ifType'],
                     interface['ifAdminStatus']))
+
                 # admin_up_required is defined as boolean in YAML file
                 if admin_up_required:
-                    self.logger.info('Admin Up Status:{}'.format(admin_up_required))
                     # interface_type is defined as array in YAML file and should provide a list of numerical interface
                     # types that should be added by default
-                    for type in interface_type:
-                        self.logger.info('Checking for interface type:{}'.format(type))
-                        if interface['ifAdminStatus'] == 1 and interface['ifType'] == type:
-                            self.logger.info("Interface {} is of type {}. Adding...(ID:{} Type:{} Status:{} )".format(
+                    for iftype in interface_type:
+                        self.logger.info('Admin Up Required: {}'.format(admin_up_required))
+                        self.logger.info('Checking for interface type: {}'.format(iftype))
+                        if interface['ifAdminStatus'] == 1 and interface['ifType'] == iftype:
+                            self.logger.info("Interface {} is of type {}. Adding...(ID:{} Type:{} Admin Status:{} )".format(
                                 interface['Caption'],
-                                type,
+                                iftype,
                                 interface['InterfaceID'],
                                 interface['ifType'],
                                 interface['ifAdminStatus']))
                             add_interfaces.append(interface)
                 else:
-                    for type in interface_type:
-                        if interface['ifType'] == type:
+                    for iftype in interface_type:
+                        if interface['ifType'] == iftype:
                             add_interfaces.append(interface)
 
         additions = self.invoke('Orion.NPM.Interfaces',
