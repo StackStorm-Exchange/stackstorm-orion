@@ -100,10 +100,10 @@ class NodesPollNow(OrionBaseAction):
                 self.results['down'].append(npm_id)
 
             # PollNow verb expects the netObjectId with the N: prepended to the NodeID
-            netObjectId = 'N:' + str(npm_id)
+            netobjectid = 'N:' + str(npm_id)
 
             self.invoke("Orion.Nodes",
                         "PollNow",
-                        netObjectId)
+                        netobjectid)
         else:
             time.sleep(pause)
