@@ -98,6 +98,9 @@ class NodesPollNow(OrionBaseAction):
             elif orion_data['results'][0]['Status'] == 2:
                 self.orion_nodes.remove(npm_id)
                 self.results['down'].append(npm_id)
+            elif orion_data['results'][0]['Status'] == 3:
+                self.orion_nodes.remove(npm_id)
+                self.results['warning'].append(npm_id)
 
             # PollNow verb expects the netObjectId with the N: prepended to the NodeID
             netobjectid = 'N:' + str(npm_id)
