@@ -38,6 +38,7 @@ class NodesPollNow(OrionBaseAction):
 
         self.results = {'down': [],
                         'up': [],
+                        'warning': [],
                         'extra_count': False}
 
         self.connect()
