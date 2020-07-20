@@ -52,7 +52,7 @@ class UpdateInterfaceCustomProperties(OrionBaseAction):
             send_user_error(msg)
             raise ValueError(msg)
 
-        current_properties = self.read(interface_uri['results'][0]['Uri']+ '/CustomProperties')
+        current_properties = self.read(interface_uri['results'][0]['Uri'] + '/CustomProperties')
 
         if custom_property not in current_properties:
             msg = "Custom property {} does not exist!".format(custom_property)
@@ -61,7 +61,8 @@ class UpdateInterfaceCustomProperties(OrionBaseAction):
 
         kargs = {custom_property: value}
 
-        self.logger.info('Updating Node: {} (Interface: {} Customer Property: {} Value: {})'.format(node, interface, custom_property, value))
+        self.logger.info('Updating Node: {} (Interface: {} Customer Property: '
+                         '{} Value: {})'.format(node, interface, custom_property, value))
         orion_data = self.update(interface_uri['results'][0]['Uri'] + '/CustomProperties', **kargs)
 
         # This update returns None, so check just in case.
