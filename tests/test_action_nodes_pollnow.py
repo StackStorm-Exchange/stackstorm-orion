@@ -44,7 +44,7 @@ class NodesPollNowTestCase(OrionBaseActionTestCase):
 
     def test_run_polled(self):
         action = self.setup_node_exists()
-        expected = {'down': [], 'extra_count': False, 'last_count': 2, 'up': [1]}
+        expected = {'down': [], 'warning': [], 'extra_count': False, 'last_count': 2, 'up': [1]}
 
         query_data = []
         query_data.append(self.query_npm_node)
