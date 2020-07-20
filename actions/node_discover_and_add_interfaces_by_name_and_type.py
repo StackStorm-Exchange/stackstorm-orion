@@ -51,8 +51,8 @@ class NodeDiscoverAndAddInterfacesbyNameandType(OrionBaseAction):
                 results['existing'].append(
                     {interface['Caption']: interface['InterfaceID']})
             else:
-                self.logger.info("Interface {} NOT monitored. (ID:{} Type:{} Admin Status:{} )".
-                    format(
+                self.logger.info("Interface {} NOT monitored. (ID:{} Type:{} \
+                Admin Status:{} )".format(
                     interface['Caption'],
                     interface['InterfaceID'],
                     interface['ifType'],
