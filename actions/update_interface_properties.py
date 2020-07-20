@@ -54,7 +54,8 @@ class UpdateInterfaceProperties(OrionBaseAction):
 
         kargs = {property: value}
 
-        self.logger.info('Updating Node: {} (Interface: {} Property: {} Value: {})'.format(node, interface, property, value))
+        self.logger.info('Updating Node: {} (Interface: {} Property: {} '
+                         'Value: {})'.format(node, interface, property, value))
         orion_data = self.update(interface_uri['results'][0]['Uri'], **kargs)
 
         # This update returns None, so check just in case.
