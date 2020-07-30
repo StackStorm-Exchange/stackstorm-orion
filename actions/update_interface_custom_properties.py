@@ -59,6 +59,15 @@ class UpdateInterfaceCustomProperties(OrionBaseAction):
             send_user_error(msg)
             raise ValueError(msg)
 
+        # Orquestra casts the string "True" to a boolean when sent to this action
+        # as input.  Check the input data for the str__ prefix and remove it
+        # before passing it to Orion in the update function
+
+        if value[0:5] == 'str__':
+            # Split the text on the double underscore and reset the value variable
+            # to the second part of the string
+            value = value.split('__')[1]
+
         kargs = {custom_property: value}
 
         self.logger.info('Updating Node: {} (Interface: {} Customer Property: '
