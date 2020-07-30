@@ -57,7 +57,7 @@ class UpdateInterfaceProperties(OrionBaseAction):
         # before passing it to Orion in the update function
 
         if value[0:5] == 'str__':
-            # Split the text on the double underscore and reset the value varialble
+            # Split the text on the double underscore and reset the value variable
             # to the second part of the string
             value = value.split('__')[1]
 
