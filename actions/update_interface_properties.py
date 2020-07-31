@@ -38,7 +38,7 @@ class UpdateInterfaceProperties(OrionBaseAction):
             raise ValueError(msg)
 
         query = 'SELECT Uri FROM Orion.NPM.Interfaces WHERE NodeID=' \
-                + str(orion_node.npm_id) + 'AND IfName=' + interface
+                + str(orion_node.npm_id) + 'AND IfName=' + str(interface)
 
         interface_uri = self.query(query)
 
