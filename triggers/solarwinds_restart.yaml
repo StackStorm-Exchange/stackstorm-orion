@@ -1,4 +1,0 @@
-name: solarwinds_restart
-description: Trigger to restart the SolarWinds services
-payload_schema:
-  type: object
