@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.7.11
+
+- Added action to enable and disable maintenance mode on a given node
+  Contributed by John Schoewe (Encore Technologies)
+
 ## 0.7.10
 
 - More linting fixes

@@ -1,0 +1,18 @@
+---
+description: "Enable/disable maintenance mode in Solarwinds Orion to suppress/resume alerts for a given node"
+enabled: true
+entry_point: "node_maintenance_mode_change.py"
+name: "node_maintenance_mode_change"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  maintenance_mode_enabled:
+    type: "boolean"
+    description: "Whether or not maintenance mode should be enabled on a given node"
+    required: true
+    default: false
+  node:
+    type: "string"
+    description: "The node to enable/disable maintenance mode for"
+    required: true
