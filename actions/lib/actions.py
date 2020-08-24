@@ -95,11 +95,10 @@ class OrionBaseAction(Action):
             kargs = {'CoreNodeID': orion_node.npm_id}
             try:
                 data_ncm = self.query(swql_ncm, **kargs)
-            except:
+            except HTTPError:
                 # Create an empty dict to allow remaining code to fail gracefully
                 data_ncm = {}
-                msg = "Connection to NCM failed. NCM not installed"
-                self.logger.info(msg)
+                self.logger.info("Connection to NCM failed. NCM not installed")
 
             # Don't raise an exception if this fails.
             # The platform may not have NCM installed.
