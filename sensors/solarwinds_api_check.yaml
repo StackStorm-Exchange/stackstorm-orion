@@ -1,0 +1,9 @@
+---
+  class_name: "SolarwindsApiCheck"
+  entry_point: "solarwinds_api_check.py"
+  description: "Verify that the SolarWinds API is up and accepting connections. Poll every 15 minutes."
+  poll_interval: 900
+  trigger_types:
+    -
+      name: "solarwinds_api_down"
+      description: "Trigger to fire when the solarwinds API is down"

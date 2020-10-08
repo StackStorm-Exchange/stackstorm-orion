@@ -1,0 +1,4 @@
+name: solarwinds_api_down
+description: Trigger that gets fired when the orion API is unreachable
+payload_schema:
+  type: object

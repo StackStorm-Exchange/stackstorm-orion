@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.8.0
+
+- Added sensor to check if the orion API is down and fires a trigger to restart the service if it is
+  Contributed by John Schoewe (Encore Technologies)
+
 ## 0.7.11
 
 - Added action to enable and disable maintenance mode on a given node
