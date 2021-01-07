@@ -63,11 +63,12 @@ class NodeCreateSNMPv3(OrionBaseAction):
                 node,
                 results['label']))
 
-        # engineID if happens to be None, default to the primary.
-        if poller is not None:
+        # Set EngineID to 1/Primary by default
+        engineID = 1
+
+        # If a poller value has been included in the Action input
+        if poller:
             engineID = self.get_engine_id(poller)
-        else:
-            engineID = 1
 
         kargs = {'Caption': node,
                  'EngineID': engineID,
