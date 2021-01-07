@@ -11,7 +11,7 @@ parameters:
     type: "string"
     description: "The node to update in Orion."
     required: true
-  poller:
+  ipaddress:
     type: "string"
     description: "The IP address to configure on the site."
     required: true
