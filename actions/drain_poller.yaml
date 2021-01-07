@@ -27,7 +27,7 @@ parameters:
   whitelist:
     type: "array"
     description: "Limit nodes to the following"
-    default: ~
+    default: false
   force:
     type: "boolean"
     description: ""
