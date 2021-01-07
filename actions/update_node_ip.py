@@ -45,7 +45,7 @@ class UpdateNodeIP(OrionBaseAction):
 
         kargs = {"IPAddress": ipaddress}
 
-        orion_data = self.update(orion_node.uri + '/IP_Address', **kargs)
+        orion_data = self.update(orion_node.uri, **kargs)
 
         # This Invoke always returns None, so check and return True
         if orion_data is None:
