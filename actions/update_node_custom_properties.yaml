@@ -1,5 +1,5 @@
 ---
-description: "Update an Orion Nodes custom properties"
+description: "Update Custom Properties on a Node in Solarwinds"
 enabled: true
 entry_point: 'update_node_custom_properties.py'
 name: "update_node_custom_properties"
