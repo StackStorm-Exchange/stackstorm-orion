@@ -1,11 +1,11 @@
 ---
 description: "Drain nodes from one Orion poller to another."
-enabled: true
+enabled: false
 entry_point: "workflows/drain_poller.yaml"
 name: "drain_poller"
 pack: "orion"
 
-runner_type: "mistral-v2"
+runner_type: "orquesta"
 
 parameters:
   src_poller:
