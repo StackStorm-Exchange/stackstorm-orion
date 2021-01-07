@@ -1,0 +1,17 @@
+---
+description: "Update the IP address assigned to a Node"
+enabled: true
+entry_point: 'update_node_ip.py'
+name: "update_node_ip"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  node:
+    type: "string"
+    description: "The node to update in Orion."
+    required: true
+  poller:
+    type: "string"
+    description: "The IP address to configure on the site."
+    required: true
