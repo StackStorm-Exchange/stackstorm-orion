@@ -1,109 +1,99 @@
 ---
-version: '2.0'
-
-orion.drain_poller:
-  description: "A workflow to drain nodes from one Orion poller to another."
-
-  input:
-    - src_poller
-    - dst_poller
-    - status
-    - whitelist
-    - force
-
-  tasks:
-    list_nodes:
-      action: orion.list_nodes_by_poller
-
-      input:
-        status: <% $.status %>
-        poller:  <% $.src_poller %>
-        whitelist: <% $. whitelist %>
-
-      on-success:
-        - unmanage_nodes
-        
-      publish:
-        orig_nodes: <% task(list_nodes).result.result.nodes %>
-
-    unmanage_nodes:
-      action: orion.node_unmanage
-
-      with-items: node in <% $.orig_nodes %>
+version: '1.0'
+description: A workflow to drain nodes from one Orion poller to another.
+input:
+  - src_poller
+  - dst_poller
+  - status
+  - whitelist
+  - force
+tasks:
+  list_nodes:
+    action: orion.list_nodes_by_poller
+    input:
+      status: <% ctx().status %>
+      poller: <% ctx().src_poller %>
+      whitelist: <% ctx().whitelist %>
+    next:
+      - when: <% succeeded() %>
+        publish:
+          - orig_nodes: <% result().result.nodes %>
+        do:
+          - unmanage_nodes
+  unmanage_nodes:
+    with:
+      items: node in <% ctx().orig_nodes %>
       concurrency: 10
-
-      input:
-        node: <% $.node %>
-        minutes: 3
-          
-      on-success:
-        - drain_nodes
-
-    drain_nodes:
-      action: orion.update_node_poller
-
-      with-items: node in <% $.orig_nodes %>
+    action: orion.node_unmanage
+    input:
+      node: <% item(node) %>
+      minutes: 3
+    next:
+      - when: <% succeeded() %>
+        do:
+          - drain_nodes
+  drain_nodes:
+    with:
+      items: node in <% ctx().orig_nodes %>
       concurrency: 10
-
-      input:
-        node: <% $.node %>
-        poller: <% $.dst_poller %>
-
-      on-success:
-        - remanage_nodes
-
-    remanage_nodes:
-      action: orion.node_remanage
-
-      with-items: node in <% $.orig_nodes %>
+    action: orion.update_node_poller
+    input:
+      node: <% item(node) %>
+      poller: <% ctx().dst_poller %>
+    next:
+      - when: <% succeeded() %>
+        do:
+          - remanage_nodes
+  remanage_nodes:
+    with:
+      items: node in <% ctx().orig_nodes %>
       concurrency: 10
-
-      input:
-        node: <% $.node %>
-          
-      on-success:
-        - check_nodes_status
-
-    check_nodes_status:
-      action: orion.list_nodes_by_status
-      retry: 
-        count: 30
-        delay: 15
-        continue-on: <% len(task(check_nodes_status).result.result.nodes_unknown) = 0  %>
-
-      input:
-        whitelist: <% $.orig_nodes %>
-        fail_on_unknowns: true
-        
-      publish:
-        nodes_down: <% task(check_nodes_status).result.result.nodes_down %>
-        nodes_up: <% task(check_nodes_status).result.result.nodes_up %>
-        nodes_unknown: <% task(check_nodes_status).result.result.nodes_unknown %>
-
-      on-success:
-        - move_downs_back: <% $.force = false %>
-        - left_nodes: <% $.force = true %>
-
-    move_downs_back:
-      action: orion.update_node_poller
-
-      with-items: node in <% $.nodes_down %>
+    action: orion.node_remanage
+    input:
+      node: <% item(node) %>
+    next:
+      - when: <% succeeded() %>
+        do:
+          - check_nodes_status
+  check_nodes_status:
+    action: orion.list_nodes_by_status
+    retry:
+      count: 30
+      delay: 15
+      when: <% succeeded() and (len(result().result.nodes_unknown) = 0) %>
+    input:
+      whitelist: <% ctx().orig_nodes %>
+      fail_on_unknowns: true
+    next:
+      - when: <% succeeded() and (ctx().force = false) %>
+        publish:
+          - nodes_down: <% result().result.nodes_down %>
+          - nodes_up: <% result().result.nodes_up %>
+          - nodes_unknown: <% result().result.nodes_unknown %>
+        do:
+          - move_downs_back
+      - when: <% succeeded() and (ctx().force = true) %>
+        publish:
+          - nodes_down: <% result().result.nodes_down %>
+          - nodes_up: <% result().result.nodes_up %>
+          - nodes_unknown: <% result().result.nodes_unknown %>
+        do:
+          - left_nodes
+  move_downs_back:
+    with:
+      items: node in <% ctx().nodes_down %>
       concurrency: 10
-       
-      input:
-        node: <% $.node %>
-        poller: <% $.src_poller %>
-
-      on-success:
-        - left_nodes
-
-    left_nodes:
-      action: orion.list_nodes_by_poller
-
-      input:
-        status: <% $.status %>
-        poller:  <% $.src_poller %>
-        whitelist: <% $. whitelist %>
-
-      publish:
-        left_nodes: <% task(left_nodes).result.result.nodes %>
+    action: orion.update_node_poller
+    input:
+      node: <% item(node) %>
+      poller: <% ctx().src_poller %>
+    next:
+      - when: <% succeeded() %>
+        do:
+          - left_nodes
+  left_nodes:
+    action: orion.list_nodes_by_poller
+    input:
+      status: <% ctx().status %>
+      poller: <% ctx().src_poller %>
+      whitelist: <% ctx().whitelist %>

@@ -93,7 +93,12 @@ class OrionBaseAction(Action):
             FROM Cirrus.Nodes
             WHERE CoreNodeID=@CoreNodeID"""
             kargs = {'CoreNodeID': orion_node.npm_id}
-            data_ncm = self.query(swql_ncm, **kargs)
+            try:
+                data_ncm = self.query(swql_ncm, **kargs)
+            except requests.exceptions.HTTPError:
+                # Create an empty dict to allow remaining code to fail gracefully
+                data_ncm = {}
+                self.logger.info("Connection to NCM failed. NCM not installed")
 
             # Don't raise an exception if this fails.
             # The platform may not have NCM installed.

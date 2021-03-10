@@ -1,5 +1,35 @@
 # Changelog
 
+## 1.0.1
+
+- Corrected numerous typos and inaccurate descriptions in the code
+- Corrected logic in the main action.py lib to allow integration with SolarWinds installs that do not include NCM
+- Updated requirements to allow use more current version of orionsdk
+- Converted drain_poller workflow from Mistral to Orquesta
+- Added Actions
+
+    - node_create_snmpv3
+    - node_discover_and_add_interfaces_by_name_and_type
+    - update_interface_properties
+    - update_interface_custom_properties
+
+## 1.0.0
+
+* Drop Python 2.7 support
+
+## 0.7.11
+
+- Added action to enable and disable maintenance mode on a given node
+  Contributed by John Schoewe (Encore Technologies)
+
+## 0.7.10
+
+- More linting fixes
+
+## 0.7.9
+
+- Minor linting fix
+
 ## 0.7.8
 
 - Fixed issue where get_node_id can return a null.

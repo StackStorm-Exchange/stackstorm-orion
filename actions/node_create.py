@@ -83,7 +83,7 @@ class NodeCreate(OrionBaseAction):
 
         self.logger.info("orion_data: {}".format(orion_data))
 
-        node_id = re.search('(\d+)$', orion_data).group(0)
+        node_id = re.search(r'(\d+)$', orion_data).group(0)
         results['node_id'] = node_id
 
         self.logger.info("Created Orion Node: {}".format(results['node_id']))

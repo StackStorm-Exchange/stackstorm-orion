@@ -19,7 +19,7 @@ from lib.utils import send_user_error
 class UpdateNodeCustomProperties(OrionBaseAction):
     def run(self, node, custom_property, value):
         """
-        Update a nodes Cutom Properties.
+        Update Custom Properties on a Node in Solarwinds.
         """
         self.connect()
 
