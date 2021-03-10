@@ -17,39 +17,30 @@ from lib.actions import OrionBaseAction
 from lib.utils import send_user_error
 
 
-class UpdateNodePoller(OrionBaseAction):
-    def run(self, node, poller):
+class NodeMaintenanceModeChange(OrionBaseAction):
+    def run(self, maintenance_mode_enabled, node):
         """
-        Change the poller for an Orion Node.
-
-        Args:
-        - node: The caption in Orion of the node to poll.
-        - poller: The poller to change the node too.
-
-        Returns
-        - True: As PollNow does not return any data.
-
-        Raises:
-        - ValueError: When a node is not found.
+        Enable/disable maintenance mode in Solarwinds Orion to suppress/resume
+        alerts for a given node
         """
 
         self.connect()
 
         orion_node = self.get_node(node)
 
-        if not orion_node.npm:
-            error_msg = "Node not found"
+        if not orion_node.uri:
+            error_msg = "Node not found for " + node
             send_user_error(error_msg)
             raise ValueError(error_msg)
 
-        engine_id = self.get_engine_id(poller)
-
-        kargs = {"EngineID": engine_id}
-
-        orion_data = self.update(orion_node.uri, **kargs)
-
-        # This Invoke always returns None, so check and return True
-        if orion_data is None:
-            return True
+        # Check if maintenance mode should be enabled or not
+        if maintenance_mode_enabled:
+            alert_action = "SuppressAlerts"
         else:
-            return orion_data
+            alert_action = "ResumeAlerts"
+
+        result = self.invoke("Orion.AlertSuppression",
+                             alert_action,
+                             [orion_node.uri])
+
+        return result
