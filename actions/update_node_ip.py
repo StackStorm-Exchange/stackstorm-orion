@@ -11,38 +11,43 @@
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
+# limitations under the License.
 
 from lib.actions import OrionBaseAction
 from lib.utils import send_user_error
 
 
-class UpdateNodeCustomProperties(OrionBaseAction):
-    def run(self, node, custom_property, value):
+class UpdateNodeIP(OrionBaseAction):
+    def run(self, node, ipaddress):
         """
-        Update Custom Properties on a Node in Solarwinds.
+        Update the IP address configured on an Orion Node.
+
+        Args:
+        - node: The caption in Orion of the node to poll.
+        - ipaddress: The new IP address to assign to the Node.
+
+        Returns
+        - True: As PollNow does not return any data.
+
+        Raises:
+        - ValueError: When a node is not found.
         """
+
         self.connect()
 
         orion_node = self.get_node(node)
 
         if not orion_node.npm:
-            msg = "Node ({}) does not exist".format(node)
-            send_user_error(msg)
-            raise ValueError(msg)
+            error_msg = "Node not found"
+            send_user_error(error_msg)
+            raise ValueError(error_msg)
 
-        current_properties = self.read(orion_node.uri + '/CustomProperties')
 
-        if custom_property not in current_properties:
-            msg = "custom property {} does not exist!".format(custom_property)
-            send_user_error(msg)
-            raise ValueError(msg)
+        kargs = {"IPAddress": ipaddress}
 
-        kargs = {custom_property: value}
+        orion_data = self.update(orion_node.uri, **kargs)
 
-        orion_data = self.update(orion_node.uri + '/CustomProperties', **kargs)
-
-        # This update returns None, so check just in case.
-        # This happens even if the custom_property does not exist!
+        # This Invoke always returns None, so check and return True
         if orion_data is None:
             return True
         else:
