@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Fixed small linting error and pushing a new version.
+
 ## 1.0.1
 
 - Corrected numerous typos and inaccurate descriptions in the code

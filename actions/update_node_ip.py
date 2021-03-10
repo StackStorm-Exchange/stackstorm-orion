@@ -42,7 +42,6 @@ class UpdateNodeIP(OrionBaseAction):
             send_user_error(error_msg)
             raise ValueError(error_msg)
 
-
         kargs = {"IPAddress": ipaddress}
 
         orion_data = self.update(orion_node.uri, **kargs)
