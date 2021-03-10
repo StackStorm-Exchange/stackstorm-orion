@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.8.0
+
+- Corrected numerous typos and inaccurate descriptions in the code
+- Corrected logic in the main action.py lib to allow integration with SolarWinds installs that do not include NCM
+- Updated requirements to allow use more current version of orionsdk
+- Converted drain_poller workflow from Mistral to Orquesta
+- Added Actions
+
+    - node_create_snmpv3
+    - node_discover_and_add_interfaces_by_name_and_type
+    - update_interface_properties
+    - update_interface_custom_properties
+    
+
+
 ## 0.7.10
 
 - More linting fixes
