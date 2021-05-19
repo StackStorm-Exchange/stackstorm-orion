@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.2
+-Added Action
+ add_custom_pollers_to_node
+
+
 ## 1.0.1
 
 - Corrected numerous typos and inaccurate descriptions in the code
