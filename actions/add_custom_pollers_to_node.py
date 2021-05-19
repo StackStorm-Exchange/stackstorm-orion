@@ -83,6 +83,7 @@ class AddCustomPollersToNode(OrionBaseAction):
         # returned from the custom poller query on the Node
 
         for entry in custompollerids:
+            self.logger.info('Entry: {}'.format(entry))
             if any(element for element in nodeassignedpollers['results'] if
                    element['CustomPollerID'] == entry['CustomPollerID']):
                 self.logger.info('Custom Poller {} already assigned to Node. Skipping...'.format(
@@ -102,7 +103,7 @@ class AddCustomPollersToNode(OrionBaseAction):
                 "CustomPollerID": entry['CustomPollerID']
             }
             response = self.create('Orion.NPM.CustomPollerAssignmentOnNode', **entrydata)
-            self.logger.info('Customer poller {} successfully assigned to Node: {}'.format(
+            self.logger.info('Custom poller {} successfully assigned to Node: {}'.format(
                 entry['CustomPollerID'], response))
             # Update results data with matching poller name
             results['added'].append(entry['UniqueName'])
