@@ -34,6 +34,7 @@ snmp_internal: "SNMP community to use if internal specified"
 
 ## Actions
 
+* `add_custom_pollers_to_node` - Add a list of custom (Universal Device) pollers to a Node
 * `add_node_to_ncm` - Add an Orion Node to NCM
 * `drain_poller` - Drain nodes from one Orion poller to another.
 * `get_discovery_progress` - Get the progress of an SolarWinds Orion Discovery.
@@ -44,18 +45,18 @@ snmp_internal: "SNMP community to use if internal specified"
 * `list_sdk_verbs` - List all the verbs that can be invoked via SolarWinds Orion
 * `ncm_config_download` - Download config(s) from SolarWinds NCM Orion module.
 * `ncm_execute_script` - Execute an script on an Orion NCM Node.
-* `node_create` - Create an node in SolarWinds Orion.
-* `node_create_snmpv3` - Create an node in SolarWinds Orion with SNMPv3.
+* `node_create` - Create a node in SolarWinds Orion.
+* `node_create_snmpv3` - Create a node in SolarWinds Orion with SNMPv3.
 * `node_discover_and_add_interfaces` - Discover and add Interfaces for a SolarWinds Orion node.
 * `node_discover_and_add_interfaces_by_name_and_type` - Discover and add Interfaces for a SolarWinds Orion node based upon the ifName, ifType, and (optional) ifAdminStatus
 * `node_remanage` - Re-manage a SolarWinds Orion nodes
 * `node_status` - Query SolarWinds Orion for a node's status (i.e. Up/Down)
-* `node_unmanage` - Unmanage an SolarWinds Orion node
+* `node_unmanage` - Unmanage a SolarWinds Orion node
 * `nodes_pollnow` - Force multiple polls of a list of SolarWinds Orion nodes.
 * `query` - Execute generic SWQL queries.
 * `start_discovery` - Create a discovery profile in SolarWinds Orion.
-* `update_interface_custom_properties` - Update an the custom properties of an interface on an Orion Node
-* `update_interface_properties` - Update an the "standard" properties (e.g. Unpluggable) on an interface of an Orion Nodes 
+* `update_interface_custom_properties` - Update the custom properties of an interface on an Orion Node
+* `update_interface_properties` - Update the "standard" properties (e.g. Unpluggable) on an interface of an Orion Nodes 
 * `update_node_custom_properties` - Update an Orion Nodes custom properties
 * `update_node_poller` - Update an Orion Nodes poller
 
