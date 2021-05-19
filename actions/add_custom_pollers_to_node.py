@@ -57,7 +57,7 @@ class AddCustomPollersToNode(OrionBaseAction):
         # for the CustomPollerID.  Results will be added to the empty list created above
 
         for entry in custompollers:
-            pollerquery = 'SELECT CustomPollerID, UniqueName FROM Orion.NPM.CustomPollers where' \
+            pollerquery = 'SELECT CustomPollerID, UniqueName FROM Orion.NPM.CustomPollers where ' \
                           'UniqueName=' + str(entry)
             entrypollerid = self.query(pollerquery)
 
