@@ -98,7 +98,7 @@ class AddCustomPollersToNode(OrionBaseAction):
         for entry in custompollerids:
             entrydata = {
                 "NodeID": str(orion_node.npm_id),
-                "CustomPollerID": str(entry['CustomPollerID'])
+                "CustomPollerID": entry['CustomPollerID']
             }
             response = self.create('Orion.NPM.CustomPollerAssignmentOnNode', **entrydata)
             self.logger.info('Customer poller {} successfully assigned to Node: {}'.format(
