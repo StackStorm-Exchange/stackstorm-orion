@@ -58,7 +58,7 @@ class AddCustomPollersToNode(OrionBaseAction):
 
         for entry in custompollers:
             pollerquery = 'SELECT CustomPollerID, UniqueName FROM Orion.NPM.CustomPollers where ' \
-                          'UniqueName=' + str(entry)
+                          'UniqueName=\'' + str(entry) + '\''
             entrypollerid = self.query(pollerquery)
 
             if entrypollerid:
