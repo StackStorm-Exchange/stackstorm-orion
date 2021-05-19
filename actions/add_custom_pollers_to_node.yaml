@@ -11,7 +11,7 @@ parameters:
     type: "string"
     description: The Node which will have the custom pollers assigned to it
     required: true
-  custom_pollers:
+  custompollers:
     type: "array"
     description: List of custom (Universal Device) pollers to be added to Node
     required: true
