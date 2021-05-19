@@ -1,5 +1,5 @@
 ---
-description: "Create an node using SNMPv3 in Solarwinds Orion."
+description: "Create an node using SNMPv3 in SolarWinds Orion."
 enabled: true
 entry_point: 'node_create_snmpv3.py'
 name: "node_create_snmpv3"
