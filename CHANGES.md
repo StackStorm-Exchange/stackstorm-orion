@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+- Added Action 
+  
+  - add_custom_poller_to_node
+
 ## 1.0.2
 
 - Fixed small linting error and pushing a new version.
