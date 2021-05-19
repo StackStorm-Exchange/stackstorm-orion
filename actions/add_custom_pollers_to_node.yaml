@@ -9,7 +9,7 @@ runner_type: "python-script"
 parameters:
   node:
     type: "string"
-    description: The node to add the custom (Universal Device) pollers to
+    description: The Node which will have the custom pollers assigned to it
     required: true
   custom_pollers:
     type: "array"
