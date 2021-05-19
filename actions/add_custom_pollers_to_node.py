@@ -35,7 +35,7 @@ class AddCustomPollersToNode(OrionBaseAction):
 
         """
         # Create empty results dict to hold action output data
-        results = {custompollers: {'added': [], 'existing': [], 'not_found': []}}
+        results = {'added': [], 'existing': [], 'not_found': []}
 
         # Establish a connection to the Orion Server
         self.connect()
