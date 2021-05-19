@@ -62,7 +62,7 @@ class AddCustomPollersToNode(OrionBaseAction):
             entrypollerid = self.query(pollerquery)
 
             if entrypollerid:
-                custompollerids.append(entrypollerid['results'])
+                custompollerids.append(entrypollerid['results'][0])
             else:
                 self.logger.info('Custom poller {} not found in Orion DB and will be '
                                  'ignored...'.format(entry))
