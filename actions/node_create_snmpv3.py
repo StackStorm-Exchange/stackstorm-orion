@@ -29,7 +29,8 @@ class NodeCreateSNMPv3(OrionBaseAction):
             privacy_password,
             auth_protocol,
             auth_password,
-            status):
+            status,
+            additional_pollers):
         """
         Create an node in Orion.
         """
@@ -116,6 +117,12 @@ class NodeCreateSNMPv3(OrionBaseAction):
             pollers_to_add['N.Status.SNMP.Native'] = True
             pollers_to_add['N.ResponseTime.ICMP.Native'] = False
             pollers_to_add['N.ResponseTime.SNMP.Native'] = True
+
+        # Check to see if any additional pollers were passed as input
+        if additional_pollers:
+            # Enable all the pollers passed as input
+            for entry in additional_pollers:
+                pollers_to_add[entry] = True
 
         pollers = []
         for p in pollers_to_add:
