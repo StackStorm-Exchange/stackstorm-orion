@@ -48,30 +48,10 @@ class AddCustomPollersToNode(OrionBaseAction):
             send_user_error(error_msg)
             raise ValueError(error_msg)
 
-        # Create an empty list of CustomPollerIDs used to hold the ID for each of the pollers
-        # passed as input to the action
-
-        custompollerids = []
-
-        # Loop through all the pollers provided as input to the action and query the Orion DB
-        # for the CustomPollerID.  Results will be added to the empty list created above
-
-        for entry in custompollers:
-            pollerquery = 'SELECT CustomPollerID, UniqueName FROM Orion.NPM.CustomPollers where ' \
-                          'UniqueName=\'' + str(entry) + '\''
-            entrypollerid = self.query(pollerquery)
-
-            if entrypollerid:
-                custompollerids.append(entrypollerid['results'][0])
-            else:
-                self.logger.info('Custom poller {} not found in Orion DB and will be '
-                                 'ignored...'.format(entry))
-                results['not_found'].append(entry)
-
-        self.logger.info('Querying list of custom pollers already configured on Node...')
-
         # Create a query string needed to pull the custom poller data assigned to the Node
         # from the Orion DB
+
+        self.logger.info('Querying list of custom pollers already configured on Node...')
 
         nodequery = 'SELECT NodeID, CustomPollerID FROM Orion.NPM.CustomPollerAssignmentOnNode ' \
                     'WHERE NodeID=' + str(orion_node.npm_id)
@@ -79,22 +59,42 @@ class AddCustomPollersToNode(OrionBaseAction):
         # Execute the query for the custom Node pollers
         nodeassignedpollers = self.query(nodequery)
 
-        # Loop through all of the entries in the Custom Poller list to see if they are in the data
-        # returned from the custom poller query on the Node
+        # Create an empty list of CustomPollerIDs used to hold the ID for each of the pollers
+        # passed as input to the action
 
-        for entry in custompollerids:
-            self.logger.info('Delete Entry: {}'.format(entry))
-            if any(element for element in nodeassignedpollers['results'] if
-                   element['CustomPollerID'] == entry['CustomPollerID']):
-                self.logger.info('Custom Poller {} already assigned to Node. Skipping...'.format(
-                    entry['UniqueName']))
-                # Update results data with matching poller name
-                results['existing'].append(entry['UniqueName'])
-                # Remove the already assigned Custom Poller from the custompollerids list
-                custompollerids.remove(entry)
+        custompollerids = []
 
-        # After removing all pollers already assigned to the Node, loop through any remaining
-        # entries and assign them to the Node
+        # Loop through all the pollers provided as input to the action and query the Orion DB
+        # for the CustomPollerID.
+
+        for entry in custompollers:
+            pollerquery = 'SELECT CustomPollerID, UniqueName FROM Orion.NPM.CustomPollers where ' \
+                          'UniqueName=\'' + str(entry) + '\''
+            entrypollerid = self.query(pollerquery)
+
+            # Check if the Custom Poller query returned exactly 1 result as expected
+            if len(entrypollerid['results']) == 1:
+                # Check if Custom Poller ID is included in the list returned from the existing
+                # poller query
+                if any(element for element in nodeassignedpollers['results'] if
+                       element['CustomPollerID'] == entrypollerid['results'][0]['CustomPollerID']):
+                    self.logger.info('Custom Poller {} already assigned to Node. Skipping...'
+                                     ''.format(entry))
+                    # Update results data with matching poller name
+                    results['existing'].append(entry['UniqueName'])
+            else:
+                # Add Custom Poller ID to list if not found to have already been assigned to the
+                # Node
+                custompollerids.append(entrypollerid['results'][0])
+
+            # Check if the Custom poller query returned either 0 or more than the expected 1
+            if len(entrypollerid['results']) >= 1 or len(entrypollerid['results']) == 0:
+                self.logger.info('Custom poller {} not found in Orion DB or the text query returned'
+                                 ' multiple entries and will be ignored...'.format(entry))
+                results['not_found'].append(entry)
+
+        # After validating all the pollers have not already been assigned to the Node, loop
+        # through all the entries and assign them to the Node
 
         for entry in custompollerids:
             self.logger.info('Add Entry: {}'.format(entry))
