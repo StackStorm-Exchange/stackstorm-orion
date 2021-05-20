@@ -41,7 +41,7 @@ snmp_internal: "SNMP community to use if internal specified"
 * `list_node_custom_properties` - List the custom properties for a SolarWinds Orion nodes
 * `list_nodes_by_poller` - List the nodes on a SolarWinds Orion poller
 * `list_nodes_by_status` - List the nodes by status
-* `list_sdk_verb_args` - List all the arguments for a entity and verb that can be invoked via SolarWinds Orion.
+* `list_sdk_verb_args` - List all the arguments for an entity and verb that can be invoked via SolarWinds Orion.
 * `list_sdk_verbs` - List all the verbs that can be invoked via SolarWinds Orion
 * `ncm_config_download` - Download config(s) from SolarWinds NCM Orion module.
 * `ncm_execute_script` - Execute an script on an Orion NCM Node.
