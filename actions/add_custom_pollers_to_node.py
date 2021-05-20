@@ -81,7 +81,7 @@ class AddCustomPollersToNode(OrionBaseAction):
                     self.logger.info('Custom Poller {} already assigned to Node. Skipping...'
                                      ''.format(entry))
                     # Update results data with matching poller name
-                    results['existing'].append(entry['UniqueName'])
+                    results['existing'].append(entry)
             else:
                 # Add Custom Poller ID to list if not found to have already been assigned to the
                 # Node
