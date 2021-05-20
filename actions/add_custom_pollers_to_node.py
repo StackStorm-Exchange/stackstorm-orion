@@ -97,14 +97,13 @@ class AddCustomPollersToNode(OrionBaseAction):
         # through all the entries and assign them to the Node
 
         for entry in custompollerids:
-            self.logger.info('Add Entry: {}'.format(entry))
             entrydata = {
                 "NodeID": str(orion_node.npm_id),
                 "CustomPollerID": entry['CustomPollerID']
             }
             response = self.create('Orion.NPM.CustomPollerAssignmentOnNode', **entrydata)
             self.logger.info('Custom poller {} successfully assigned to Node: {}'.format(
-                entry['CustomPollerID'], response))
+                entry['UniqueName'], response))
             # Update results data with matching poller name
             results['added'].append(entry['UniqueName'])
         return results
