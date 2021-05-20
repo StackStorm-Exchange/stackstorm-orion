@@ -82,10 +82,10 @@ class AddCustomPollersToNode(OrionBaseAction):
                                      ''.format(entry))
                     # Update results data with matching poller name
                     results['existing'].append(entry)
-            else:
-                # Add Custom Poller ID to list if not found to have already been assigned to the
-                # Node
-                custompollerids.append(entrypollerid['results'][0])
+                else:
+                    # Add Custom Poller ID to list if not found to have already been assigned to the
+                    # Node
+                    custompollerids.append(entrypollerid['results'][0])
 
             # Check if the Custom poller query returned either 0 or more than the expected 1
             if len(entrypollerid['results']) > 1 or len(entrypollerid['results']) == 0:
