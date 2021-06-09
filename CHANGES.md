@@ -4,7 +4,7 @@
 
 - Added Action 
   
-  - add_custom_poller_to_node
+- add_custom_poller_to_node
   
 - Updated node_create_snmpv3 action to include the option to specify which default pollers to enable when adding the Node
 
