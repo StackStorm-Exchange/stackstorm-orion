@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.3
+
+- Added Action 
+  
+  - add_custom_poller_to_node
+  
+- Updated node_create_snmpv3 action to include the option to specify which default pollers to enable when adding the Node
+
 ## 1.0.2
 
 - Fixed small linting error and pushing a new version.

@@ -1,5 +1,5 @@
 ---
-description: "Create an node using SNMPv3 in Solarwinds Orion."
+description: "Create an node using SNMPv3 in SolarWinds Orion."
 enabled: true
 entry_point: 'node_create_snmpv3.py'
 name: "node_create_snmpv3"
@@ -35,6 +35,7 @@ parameters:
   privacy_password:
     type: "string"
     required: true
+    secret: true
     description: "The SNMPv3 Privacy password used to poll SNMP from remote device."
   auth_protocol:
     type: "string"
@@ -46,6 +47,7 @@ parameters:
   auth_password:
     type: "string"
     required: true
+    secret: true
     description: "The SNMPv3 Authentication password used to poll SNMP from remote device."
   status:
     type: "string"
@@ -54,3 +56,7 @@ parameters:
       - "icmp"
     description: "Protocol to use for Status and Response Time checks."
     default: "snmp"
+  additional_pollers:
+    type: "array"
+    required: false
+    description: "List of Orion pollers to enable when creating Node. ** Must be specified using the correct Orion DB naming syntax."

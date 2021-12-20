@@ -1,0 +1,17 @@
+---
+description: "Add custom NPM Universal Device Pollers to a Node in SolarWinds"
+enabled: true
+entry_point: 'add_custom_pollers_to_node.py'
+name: "add_custom_pollers_to_node"
+pack: "orion"
+runner_type: "python-script"
+
+parameters:
+  node:
+    type: "string"
+    description: The Node which will have the custom pollers assigned to it
+    required: true
+  custompollers:
+    type: "array"
+    description: List of custom (Universal Device) pollers to be added to Node
+    required: true
