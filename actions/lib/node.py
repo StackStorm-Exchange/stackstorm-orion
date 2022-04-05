@@ -41,7 +41,7 @@ class OrionNode(object):
             self._ip_address)
 
     def __repr__(self):
-        return self.__str__
+        return self.__str__()
 
     @property
     def ip_address(self):
