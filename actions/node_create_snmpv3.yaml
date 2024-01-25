@@ -43,6 +43,8 @@ parameters:
     enum:
       - "MD5"
       - "SHA1"
+      - "SHA256"
+      - "SHA512"
     default: "SHA1"
   auth_password:
     type: "string"
