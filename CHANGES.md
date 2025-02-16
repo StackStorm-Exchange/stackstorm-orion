@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.4
+
+- Updated files to work with latest CI updates
+
 ## 1.0.3
 
 - Fixed action __repr__ to return a string (satisfy pylint).
